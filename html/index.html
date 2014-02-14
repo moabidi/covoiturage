@@ -1,0 +1,350 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html lang="en" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City Break | The Basics</title>
+
+<!-- main JS libs -->
+<script src="js/libs/jquery-1.10.2.min.js"></script>
+<script src="js/libs/jquery-ui.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+
+<!-- Style CSS -->
+<link href="css/bootstrap.css" media="screen" rel="stylesheet">
+<link href="style.css" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script src="js/general.js"></script>
+
+<!-- custom input -->
+<script src="js/jquery.customInput.js"></script>
+
+<!-- Placeholders -->
+<script src="js/jquery.powerful-placeholder.min.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<!-- styled select -->
+<link rel="stylesheet" href="css/cusel.css">
+<script src="js/cusel.min.js"></script>
+
+<!-- CarouFredSel  -->
+<script src="js/jquery.carouFredSel-6.2.1-packed.js"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="css/prettyPhoto.css" rel="stylesheet">
+<script src="js/jquery.prettyPhoto.js"></script>
+
+<!-- Video Player -->
+<link href="css/video-js.css" rel="stylesheet">
+<script src="js/video.js"></script>
+<script>
+    videojs.options.flash.swf = "js/video-js.swf";
+</script>
+
+<!-- Audio Player -->
+<link href="css/jplayer.css" rel="stylesheet">
+<script src="js/jquery.jplayer.min.js"></script>
+<script src="js/jplayer.playlist.min.js"></script>
+
+<!-- Calendar -->
+<script src="js/jquery-ui.multidatespicker.js"></script>
+
+<!-- range sliders -->
+<script src="js/jquery.slider.bundle.js"></script>
+<script src="js/jquery.slider.js"></script>
+<link href="css/jslider.css" rel="stylesheet">
+
+<!-- Visual Text Editor -->
+<script src="js/nicEdit.js"></script>
+
+<!-- Multiselect (Chosen.js) -->
+    <link rel="stylesheet" href="css/chosen.css">
+    <script src="js/chosen.jquery.min.js"></script>
+
+<!-- Nivo Lightbox -->
+    <link rel="stylesheet" href="css/nivo-lightbox.css" type="text/css" />
+    <link rel="stylesheet" href="css/nivo-lightbox/themes/default/default.css" type="text/css" />
+    <script src="js/nivo-lightbox.min.js"></script>
+
+<!--[if lt IE 9]><script src="js/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+<div class="body-wrap">
+    <div class="content">
+        <!--container-->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- Logo -->
+                    <h1 class="logo"><a href="#"><img src="images/logo.png" class="img-responsive" alt="Covoiturage.tn"/></a></h1>
+                    <!--/ Logo -->
+                </div>
+                <div class="col-sm-6">
+                    <!-- User Menu -->
+                    <div class="user-buttons buttons pull-right">
+                        <a class="btn btn-icon btn-icon-left btn-icon-checkout btn-red" href="#" hidefocus="true" style="outline: medium none;"><span>S'inscrire</span></a>
+                        <a class="btn btn-icon btn-icon-left btn-icon-login btn-green" href="#connexion-box" hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Se connecter</span></a>
+                    </div>
+                    <!--/ User Menu -->
+                </div>
+
+            </div>
+            <!--/ row -->
+
+            <!-- .row-->
+            <div class="row">
+                <div class="col-sm-4">
+
+                <!-- Reservation Form -->
+                <div class="widget-container widget-reservation boxed boxed-blue green-line">
+                    <h3 class="widget-title">Recherche rapide</h3>
+                    <form action="#" method="post" id="reservation">
+                        <div class="inner">
+                            <div class="section section-place">
+                                <div class="field_text input-place">
+                                    <label for="filter_place_in" class="label_title">Ville de départ</label>
+                                    <input type="text" name="filter_place_in" value="Ville de départ" onfocus="if (this.value == 'Check in') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Check in';}" id="filter_place_in" />
+                                </div>
+                                <div class="field_text input-place">
+                                    <label for="filter_place_out" class="label_title">Ville d'arrivée</label>
+                                    <input type="text" name="filter_place_out" value="Ville d'arrivée" onfocus="if (this.value == 'Check out') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Check out';}" id="filter_place_out" />
+                                </div>
+                            </div>
+                            <div class="section section-date">
+                                <div class="field_text input-date">
+                                    <label for="filter_date_in" class="label_title">Date</label>
+                                    <input type="text" name="filter_date_in" value="Date de départ" onfocus="if (this.value == 'Check in') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Check in';}" id="filter_date_in" />
+                                </div>
+                                <script>
+                                    jQuery(document).ready(function($) {
+                                        $("#filter_date_in").datepicker({
+                                            dateFormat: 'MM dd, yy',
+                                            minDate: 0,
+                                            showOtherMonths: true
+                                        });
+                                    });
+                                </script>
+                            </div>
+                            <div class="section section-persons clearfix">
+                                <label for="nb_places" class="label_title">Nombre de place disponible</label>
+                                <select class="select_styled blue" name="nb_places" id="nb_places">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="rowSubmit">
+                            <span class="btn btn-full"><input type="submit" id="send3" value="Rechercher" /></span>
+                        </div>
+                    </form>
+                </div>
+                <!--/ Reservation Form -->
+
+                <!-- post item -->
+                <div class="widget-container post-item boxed red-line style3">
+                    <div class="post-content">
+                        <h2 class="post-title"><a href="#">Pourquoi faire du covoiturage?</a></h2>
+                        <div class="post-desc">
+                            <p>Le covoiturage consiste à partager son véhicule personnel avec d'autres usagers pour effectuer un trajet commun, son utilisation peut être régulière comme occasionnelle, il peut être utilisé pour les trajets "maison – travail", "maison- école- travail ,"maison-faculté"... Certaines personnes utilisent également le covoiturage pour partir en vacances ou pour un voyage à la dernière minute.</p>
+                        </div>
+                    </div>
+                </div>
+                <!--/ post item -->
+
+                <!-- Login widget -->
+                <div class="widget-container widget-login boxed blue-line">
+                    <h3 class="widget-title"><span>Connexion<strong>utilisateur</strong></span></h3>
+                    <form method="post" action="#">
+                        <div class="inner">
+                            <div class="field_text">
+                                <label for="user-login" class="label_title">Nom d'utilisateur</label>
+                                <input type="text" name="log" id="user-login" value="" placeholder="Nom d'utilisateur" />
+                            </div>
+                            <div class="field_text">
+                                <label for="user-pass" class="label_title">Mot de passe</label>
+                                <input type="password" name="pwd" id="user-pass" value="" placeholder="Mot de passe" />
+                            </div>
+                            <div class="divider"></div>
+                            <div class="rowRemember">
+                                <div class="forgetmenot input_styled checklist">
+                                    <div class="rowCheckbox"><input type="checkbox" name="remember" id="remember" value="" checked><label for="remember">Se souvenir de moi</label></div>
+                                </div>
+                                <span class="forget-password"><a href="#">J'ai oublié mon mot de passe?</a></span>
+                            </div>
+                        </div>
+                        <div class="rowSubmit clearfix">
+                            <span class="btn btn-icon btn-icon-right btn-icon-login btn-green"><input type="submit" name="login-submit" id="login-submit" value="Accédez à votre compte" /></span>
+                        </div>
+                    </form>
+                </div>
+                <!--/ Login widget -->
+            </div>
+                <div class="col-sm-8">
+                    <!-- Price List -->
+                    <div class="price-list boxed">
+                        <ul class="price-top clearfix">
+                            <li class="price-content">Trajets</li>
+                            <li class="price">Pl.libres & Prix</li>
+                            <li class="price-reserve">Reservation</li>
+                        </ul>
+
+                        <!-- Price item -->
+                        <div class="price-item">
+                            <ul class="clearfix">
+                                <li class="price-content clearfix">
+                                    <div class="price-content-left hidden-sm">
+                                        <div class="price-image"><img alt="" src="images/temp/avatar.png" class="img-circle"></div>
+                                    </div>
+                                    <div class="price-content-right">
+                                        <span class="price-info">09/02/2014 | 16:00</span>
+                                        <h2 class="price-title"><a href="#">Sfax → Tunis</a></h2>
+                                        <div class="price-rating">
+                                            <div class="rating clearfix">
+                                                <span rel="1" class="star voted"></span>
+                                                <span rel="2" class="star voted"></span>
+                                                <span rel="3" class="star voted"></span>
+                                                <span rel="4" class="star voted"></span>
+                                                <span rel="5" class="star"></span>
+                                            </div>
+                                        </div>
+                                        <div class="price-desc hidden-lg">
+                                            <p>Pseudo : bhb.amine<br />
+                                                Age :  1990<br />
+                                                Numéro portable : 52234765<br />
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="price">
+                                    <span class="price-info">3 pl.libres</span>
+                                    <i class="icon-price triple hidden-lg"></i>
+                                    <strong>12<sup>DT</sup></strong>
+                                    <span>par personne</span>
+                                </li>
+                                <li class="price-reserve">
+                                    <a href="#" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/ Price item -->
+
+                        <!-- Price item -->
+                        <div class="price-item">
+                            <ul class="clearfix">
+                                <li class="price-content clearfix">
+                                    <div class="price-content-left hidden-sm">
+                                        <div class="price-image"><img alt="" src="images/temp/avatar.jpg" class="img-circle"></div>
+                                    </div>
+                                    <div class="price-content-right">
+                                        <span class="price-info">06/02/2014 | 06:30</span>
+                                        <h2 class="price-title"><a href="#">Mejez El Bab → Ariana</a></h2>
+                                        <div class="price-rating">
+                                            <div class="rating clearfix">
+                                                <span rel="1" class="star voted"></span>
+                                                <span rel="2" class="star voted"></span>
+                                                <span rel="3" class="star voted"></span>
+                                                <span rel="4" class="star "></span>
+                                                <span rel="5" class="star"></span>
+                                            </div>
+                                        </div>
+                                        <div class="price-desc hidden-lg">
+                                            <p>Pseudo  : Radou<br />
+                                                Age :  27 ans<br />
+                                                Numéro portable : 96846492<br />
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="price">
+                                    <span class="price-info">2 pl.libres</span>
+                                    <i class="icon-price double hidden-lg"></i>
+                                    <strong>7<sup>DT</sup></strong>
+                                    <span>par personne</span>
+                                </li>
+                                <li class="price-reserve">
+                                    <a href="#" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/ Price item -->
+
+                        <!-- Price item -->
+                        <div class="price-item">
+                            <ul class="clearfix">
+                                <li class="price-content clearfix">
+                                    <div class="price-content-left hidden-sm">
+                                        <div class="price-image"><img alt="" src="images/temp/avatar1.png" class="img-circle"></div>
+                                    </div>
+                                    <div class="price-content-right">
+                                        <span class="price-info">31/01/2014 | 18:00</span>
+                                        <h2 class="price-title"><a href="#">Tunis → Mahdia</a></h2>
+                                        <div class="price-rating">
+                                            <div class="rating clearfix">
+                                                <span rel="1" class="star voted"></span>
+                                                <span rel="2" class="star voted"></span>
+                                                <span rel="3" class="star voted"></span>
+                                                <span rel="4" class="star "></span>
+                                                <span rel="5" class="star"></span>
+                                            </div>
+                                        </div>
+                                        <div class="price-desc hidden-lg">
+                                            <p>Pseudo : Ahmed Belguith<br />
+                                                Age :  20 ans<br />
+                                                Numéro portable : 21139740<br />
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="price">
+                                    <span class="price-info">1 pl.libres</span>
+                                    <i class="icon-price hidden-lg"></i>
+                                    <strong>10.100<sup>DT</sup></strong>
+                                    <span>par personne</span>
+                                </li>
+                                <li class="price-reserve">
+                                    <a href="#" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/ Price item -->
+                    </div>
+                    <!--/ Price List -->
+                    <!-- pagination -->
+                    <ul class="pagination">
+                        <li><a href="#" hidefocus="true" style="outline: medium none;">‹</a></li>
+                        <li><a href="#" hidefocus="true" style="outline: medium none;">1</a></li>
+                        <li class="active"><a href="#" hidefocus="true" style="outline: medium none;">2</a></li>
+                        <li><a href="#" hidefocus="true" style="outline: medium none;">3</a></li>
+                        <li class="disabled"><a href="#" hidefocus="true" style="outline: medium none;">…</a></li>
+                        <li><a href="#" hidefocus="true" style="outline: medium none;">15</a></li>
+                        <li><a href="#" hidefocus="true" style="outline: medium none;">16</a></li>
+                        <li><a href="#" hidefocus="true" style="outline: medium none;">›</a></li>
+                    </ul>
+                    <!--/ pagination -->
+                </div>
+            </div>
+            <!--/ .row-->
+
+        </div>
+        <!--/ container -->
+    </div>
+</div>
+</body>
+</html>
