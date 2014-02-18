@@ -1,0 +1,7 @@
+parameters:
+#    covoiturage_frontend.example.class: Covoiturage\FrontendBundle\Example
+
+services:
+#    covoiturage_frontend.example:
+#        class: %covoiturage_frontend.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

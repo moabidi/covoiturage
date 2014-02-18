@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 14 Février 2014 à 17:33
+-- Généré le: Mar 18 Février 2014 à 16:17
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.3.13
 
@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS `delegation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `id_gouvernorat` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_deleg_gov` (`id_gouvernorat`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=263 ;
 
 --
@@ -311,7 +312,8 @@ CREATE TABLE IF NOT EXISTS `gouvernorat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `id_pays` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `fk_gov_pays` (`id_pays`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
 
 --
@@ -393,7 +395,9 @@ CREATE TABLE IF NOT EXISTS `voiture` (
   `id` int(11) NOT NULL DEFAULT '0',
   `marque` varchar(100) NOT NULL,
   `photo` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `id_personne` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_voiture_pers` (`id_personne`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -414,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `voyage` (
   PRIMARY KEY (`id`),
   KEY `fk_depart` (`id_depart`),
   KEY `fk_arrive` (`id_arrive`),
-  KEY `fk_voiture` (`id_voiture`)
+  KEY `fk_voy_voiture` (`id_voiture`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -422,12 +426,30 @@ CREATE TABLE IF NOT EXISTS `voyage` (
 --
 
 --
+-- Contraintes pour la table `delegation`
+--
+ALTER TABLE `delegation`
+  ADD CONSTRAINT `fk_deleg_gov` FOREIGN KEY (`id_gouvernorat`) REFERENCES `gouvernorat` (`id`);
+
+--
+-- Contraintes pour la table `gouvernorat`
+--
+ALTER TABLE `gouvernorat`
+  ADD CONSTRAINT `fk_gov_pays` FOREIGN KEY (`id_pays`) REFERENCES `pays` (`id`);
+
+--
+-- Contraintes pour la table `voiture`
+--
+ALTER TABLE `voiture`
+  ADD CONSTRAINT `fk_voiture_pers` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id`);
+
+--
 -- Contraintes pour la table `voyage`
 --
 ALTER TABLE `voyage`
-  ADD CONSTRAINT `fk_depart` FOREIGN KEY (`id_depart`) REFERENCES `delegation` (`id`),
   ADD CONSTRAINT `fk_arrive` FOREIGN KEY (`id_arrive`) REFERENCES `delegation` (`id`),
-  ADD CONSTRAINT `fk_voiture` FOREIGN KEY (`id_voiture`) REFERENCES `voiture` (`id`);
+  ADD CONSTRAINT `fk_depart` FOREIGN KEY (`id_depart`) REFERENCES `delegation` (`id`),
+  ADD CONSTRAINT `fk_voy_voiture` FOREIGN KEY (`id_voiture`) REFERENCES `voiture` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

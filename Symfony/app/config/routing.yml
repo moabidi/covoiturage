@@ -1,0 +1,4 @@
+covoiturage_frontend:
+    resource: "@CovoiturageFrontendBundle/Resources/config/routing.yml"
+    prefix:   /
+
