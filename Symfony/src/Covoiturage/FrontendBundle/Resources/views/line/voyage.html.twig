@@ -1,0 +1,39 @@
+<!-- Price item -->
+<div class="price-item">
+    <ul class="clearfix">
+        <li class="price-content clearfix">
+            <div class="price-content-left hidden-sm">
+                <div class="price-image"><img alt="" src="{{ asset('bundles/covoituragefrontend/images/temp/avatar.jpg') }}" class="img-circle"></div>
+            </div>
+            <div class="price-content-right">
+                <span class="price-info">{{ voyage.horaire }}</span>
+                <h2 class="price-title"><a href="#">{{ voyage.idDepart.name }} → {{ voyage.idArrive.name }}</a></h2>
+                <div class="price-rating">
+                    <div class="rating clearfix">
+                        <span rel="1" class="star voted"></span>
+                        <span rel="2" class="star voted"></span>
+                        <span rel="3" class="star voted"></span>
+                        <span rel="4" class="star "></span>
+                        <span rel="5" class="star"></span>
+                    </div>
+                </div>
+                <div class="price-desc hidden-lg">
+                    <p>Pseudo  : {{ voyage.idVoiture.idPersonne.pseudo }}<br />
+                        Age :  {{ voyage.idVoiture.idPersonne.age }} ans<br />
+                        Numéro portable : {{ voyage.idVoiture.idPersonne.tel }}<br />
+                    </p>
+                </div>
+            </div>
+        </li>
+        <li class="price">
+            <span class="price-info">{{ voyage.nbPlace }} pl.libres</span>
+            <i class="icon-price double hidden-lg"></i>
+            <strong>{{ voyage.prix }}<sup>DT</sup></strong>
+            <span>par personne</span>
+        </li>
+        <li class="price-reserve">
+            <a href="#" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
+        </li>
+    </ul>
+</div>
+<!--/ Price item -->

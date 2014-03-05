@@ -16,7 +16,8 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:voyage')->findAll();
-        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig', array('list_offres' => $listOffres));
+        //var_dump($listOffres);
+        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig', array('list_voyages' => $listOffres));
     }
 
     public function registerAction()

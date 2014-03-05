@@ -32,7 +32,7 @@ Voyage:
             targetEntity: Delegation
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: arrive
             joinColumns:
                 id_arrive:
                     referencedColumnName: id
@@ -41,7 +41,7 @@ Voyage:
             targetEntity: Delegation
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: depart
             joinColumns:
                 id_depart:
                     referencedColumnName: id
@@ -50,7 +50,7 @@ Voyage:
             targetEntity: Voiture
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: voiture
             joinColumns:
                 id_voiture:
                     referencedColumnName: id

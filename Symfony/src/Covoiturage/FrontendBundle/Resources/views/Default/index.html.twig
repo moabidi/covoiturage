@@ -1,6 +1,7 @@
-<html>
-    <head></head>
-    <body>
-    Hello {{ name }}!
-    </body>
-</html>
+{% extends 'CovoiturageFrontendBundle::layout.html.twig' %}
+
+{%  block content %}
+    {% for voyage in list_voyages %}
+        {% include 'CovoiturageFrontendBundle:line:voyage.html.twig' with {'voyage':voyage} %}
+    {% endfor %}
+{% endblock %}

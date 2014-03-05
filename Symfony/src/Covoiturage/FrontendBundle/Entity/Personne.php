@@ -56,7 +56,9 @@ class Personne
      */
     private $age;
 
-
+    public function __toString(){
+        return (string) $this->pseudo;
+    }
 
     /**
      * Get id

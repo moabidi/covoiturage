@@ -1,0 +1,73 @@
+<meta charset="utf-8">
+<meta name="author" content="">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City Break | The Basics</title>
+
+<!-- main JS libs -->
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/libs/jquery-1.10.2.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/libs/jquery-ui.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/libs/bootstrap.min.js') }}"></script>
+
+<!-- Style CSS -->
+<link href="{{ asset('bundles/covoituragefrontend/css/bootstrap.css') }}" media="screen" rel="stylesheet">
+<link href="{{ asset('bundles/covoituragefrontend/css/style.css') }}" media="screen" rel="stylesheet">
+
+<!-- General Scripts -->
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/general.js') }}"></script>
+
+<!-- custom input -->
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery.customInput.js') }}"></script>
+
+<!-- Placeholders -->
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery.powerful-placeholder.min.js') }}"></script>
+<script>
+    jQuery(document).ready(function($) {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+    });
+</script>
+
+<!-- styled select -->
+<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/cusel.css') }}">
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/cusel.min.js') }}"></script>
+
+<!-- CarouFredSel  -->
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery.carouFredSel-6.2.1-packed.js') }}"></script>
+
+<!-- Lightbox prettyPhoto -->
+<link href="{{ asset('bundles/covoituragefrontend/css/prettyPhoto.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery.prettyPhoto.js') }}"></script>
+
+<!-- Video Player -->
+<link href="{{ asset('bundles/covoituragefrontend/css/video-js.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/video.js') }}"></script>
+<script> videojs.options.flash.swf = "bundles/covoituragefrontend/js/video-js.swf";</script>
+
+<!-- Audio Player -->
+<link href="{{ asset('bundles/covoituragefrontend/css/jplayer.css') }}" rel="stylesheet">
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery.jplayer.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jplayer.playlist.min.js') }}"></script>
+
+<!-- Calendar -->
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery-ui.multidatespicker.js') }}"></script>
+
+<!-- range sliders -->
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery.slider.bundle.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/jquery.slider.js') }}"></script>
+<link href="{{ asset('bundles/covoituragefrontend/css/jslider.css') }}" rel="stylesheet">
+
+<!-- Visual Text Editor -->
+<script src="{{ asset('bundles/covoituragefrontend/js/nicEdit.js') }}"></script>
+
+<!-- Multiselect (Chosen.js) -->
+<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/chosen.css') }}">
+<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/chosen.jquery.min.js') }}"></script>
+
+{# <!-- Nivo Lightbox -->
+<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/nivo-lightbox.css') }}" type="text/css" />
+<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/nivo-lightbox/themes/default/default.css') }}" type="text/css" />
+<script src="{{ asset('bundles/covoituragefrontend/js/nivo-lightbox.min.js') }}"></script> #}
+
+<!--[if lt IE 9]><script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/respond.min.js') }}"></script><![endif]-->

@@ -1,0 +1,42 @@
+<form action="#" method="post" id="reservation">
+    <div class="inner">
+        <div class="section section-place">
+            <div class="field_text input-place">
+                <label for="filter_place_in" class="label_title">Ville de départ</label>
+                <input type="text" name="filter_place_in" value="Ville de départ" onfocus="if (this.value == 'Check in') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Check in';}" id="filter_place_in" />
+            </div>
+            <div class="field_text input-place">
+                <label for="filter_place_out" class="label_title">Ville d'arrivée</label>
+                <input type="text" name="filter_place_out" value="Ville d'arrivée" onfocus="if (this.value == 'Check out') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Check out';}" id="filter_place_out" />
+            </div>
+        </div>
+        <div class="section section-date">
+            <div class="field_text input-date">
+                <label for="filter_date_in" class="label_title">Date</label>
+                <input type="text" name="filter_date_in" value="Date de départ" onfocus="if (this.value == 'Check in') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Check in';}" id="filter_date_in" />
+            </div>
+            <script>
+                jQuery(document).ready(function($) {
+                    $("#filter_date_in").datepicker({
+                        dateFormat: 'MM dd, yy',
+                        minDate: 0,
+                        showOtherMonths: true
+                    });
+                });
+            </script>
+        </div>
+        <div class="section section-persons clearfix">
+            <label for="nb_places" class="label_title">Nombre de place disponible</label>
+            <select class="select_styled blue" name="nb_places" id="nb_places">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    </div>
+    <div class="rowSubmit">
+        <span class="btn btn-full"><input type="submit" id="send3" value="Rechercher" /></span>
+    </div>
+</form>

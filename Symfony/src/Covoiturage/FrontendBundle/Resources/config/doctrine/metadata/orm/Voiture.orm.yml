@@ -24,7 +24,7 @@ Voiture:
             targetEntity: Personne
             cascade: {  }
             mappedBy: null
-            inversedBy: null
+            inversedBy: personne
             joinColumns:
                 id_personne:
                     referencedColumnName: id
