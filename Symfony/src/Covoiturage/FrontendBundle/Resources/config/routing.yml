@@ -1,3 +1,15 @@
 covoiturage_frontend_homepage:
-    pattern:  /hello/{name}
+    pattern:  /home
     defaults: { _controller: CovoiturageFrontendBundle:Default:index }
+######Gov list root###########
+covoiturage_frontend_getGouvernorats:
+    pattern:  /list/gouvernorats
+    defaults: { _controller: CovoiturageFrontendBundle:Place:getGouvernorats }
+######Del list root###########
+covoiturage_frontend_createDel:
+    pattern:  /list/delegations
+    defaults: { _controller: CovoiturageFrontendBundle:Place:getDelegations }
+######Loc list root###########
+covoiturage_frontend_getLocations:
+    pattern:  /list/locations
+    defaults: { _controller: CovoiturageFrontendBundle:Place:getLocations }
