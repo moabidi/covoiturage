@@ -6,10 +6,14 @@ covoiturage_frontend_getGouvernorats:
     pattern:  /list/gouvernorats
     defaults: { _controller: CovoiturageFrontendBundle:Place:getGouvernorats }
 ######Del list root###########
-covoiturage_frontend_createDel:
+covoiturage_frontend_getDelegations:
     pattern:  /list/delegations
     defaults: { _controller: CovoiturageFrontendBundle:Place:getDelegations }
 ######Loc list root###########
 covoiturage_frontend_getLocations:
     pattern:  /list/locations
     defaults: { _controller: CovoiturageFrontendBundle:Place:getLocations }
+######search root###########
+covoiturage_frontend_search:
+    pattern:  /search
+    defaults: { _controller: CovoiturageFrontendBundle:Default:search }

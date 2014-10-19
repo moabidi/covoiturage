@@ -28,7 +28,7 @@ class PlaceController extends Controller{
             $pays = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Pays')->find($idPays);
             $listGouvernorats = $pays->getGouvernorats();
         }else{
-            $listGouvernorats = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:gouvernorat')->findAll();
+            $listGouvernorats = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Gouvernorat')->findAll();
         }
         return $this->render('CovoiturageFrontendBundle:_common:list_options.html.twig', array(
             'list_options' => $listGouvernorats,
@@ -46,7 +46,7 @@ class PlaceController extends Controller{
     {
         $idGouvernorat = $request->request->get('idPays');
         if (is_numeric($idGouvernorat)){
-            $listDelegations = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:delegation')->matching( new Criteria( new Expr\Comparison( "idGouvernorat",Expr\Comparison::EQ,$idGouvernorat)));
+            $listDelegations = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Delegation')->matching( new Criteria( new Expr\Comparison( "idGouvernorat",Expr\Comparison::EQ,$idGouvernorat)));
             return $this->render('CovoiturageFrontendBundle:_common:list_options.html.twig', array(
                 'list_options' => $listDelegations,
                 'select_field' => 'delegation'
@@ -65,10 +65,9 @@ class PlaceController extends Controller{
     {
         $idDelegation = $request->request->get('idPays');
         if (is_numeric($idDelegation)){
-            $del = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Delegation')->find($idDelegation);
-            $listLocalites = $del->getLocalites();
+            $listDelegations = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Localite')->matching( new Criteria( new Expr\Comparison( "IdDelegation",Expr\Comparison::EQ,$idDelegation)));
             return $this->render('CovoiturageFrontendBundle:_common:list_options.html.twig', array(
-                'list_options' => $listLocalites,
+                'list_options' => $listDelegations,
                 'select_field' => 'localite'
             ));
         }else{

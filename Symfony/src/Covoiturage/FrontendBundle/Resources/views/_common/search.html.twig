@@ -4,18 +4,20 @@
             <div id="started_place" class="field_text">
                 <label for="filter_place_in" class="label_title">Lieu de départ</label>
                 {{ render( controller( 'CovoiturageFrontendBundle:Place:getGouvernorats' )) }}
-                <div style="display: none"><select id="annonce_idDelegation"></select></div>
-                <div style="display: none"><select id="annonce_idLocalite"></select></div>
+                <div style="display: none"><select class="annonce_idDelegation select_styled blue"></select></div>
+                <div style="display: none"><select class="annonce_idLocalite select_styled blue"></select></div>
             </div>
             <div id="arrived_place" class="field_text">
                 <label for="filter_place_out" class="label_title">Lieu d'arrivé</label>
-                {# render( controller( 'CovoiturageFrontendBundle:Place:getGouvernorats' )) #}
+                {{ render( controller( 'CovoiturageFrontendBundle:Place:getGouvernorats' )) }}
+                <div style="display: none"><select class="annonce_idDelegation select_styled blue"></select></div>
+                <div style="display: none"><select class="annonce_idLocalite select_styled blue"></select></div>
             </div>
         </div>
         <div class="section section-date">
             <div class="field_text input-date">
                 <label for="filter_date_in" class="label_title">Date</label>
-                <input type="text" name="filter_date_in" value="Date de départ" onfocus="if (this.value == 'Check in') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Check in';}" id="filter_date_in" />
+                <input data-role="date" data-inline="true" type="text" name="filter_date_in" value="Date de départ" id="filter_date_in" />
             </div>
             <script>
                 jQuery(document).ready(function($) {

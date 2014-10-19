@@ -1,6 +1,6 @@
 <?php
 
-namespace Immobilier\ManagerBundle\Entity;
+namespace Covoiturage\FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,11 +31,13 @@ class Localite
     /**
      * @var integer
      *
-     * @ORM\Column(name="delegation_id", type="integer", nullable=false)
-     * @ManyToOne(targetEntity="Delegation")
-     * @JoinColumn(name="delegation_id", referencedColumnName="name")
+     * @ORM\Column(name="id_delegation", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Delegation")
+     * @ORM\JoinColumns({
+     *      @ORM\JoinColumn(name="id_delegation", referencedColumnName="name")
+     * })
      */
-    private $delegationId;
+    private $IdDelegation;
     private $delegation;
 
 
@@ -75,12 +77,12 @@ class Localite
     /**
      * Set delegationId
      *
-     * @param integer $delegationId
+     * @param integer $IdDelegation
      * @return Localite
      */
-    public function setDelegationId($delegationId)
+    public function setDelegationId($IdDelegation)
     {
-        $this->delegationId = $delegationId;
+        $this->delegationId = $IdDelegation;
     
         return $this;
     }
