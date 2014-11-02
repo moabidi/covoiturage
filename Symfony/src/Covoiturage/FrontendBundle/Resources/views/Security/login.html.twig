@@ -1,0 +1,10 @@
+{% extends 'CovoiturageFrontendBundle::layout.html.twig' %}
+
+
+{% block content %}
+    {% if error %}
+        <div class="alert alert-danger" style="font-size: 1.2em;">Login ou Mot de passe invalide</div>
+    {% endif %}
+
+    {{ render(controller('CovoiturageFrontendBundle:User:login')) }}
+{% endblock %}
