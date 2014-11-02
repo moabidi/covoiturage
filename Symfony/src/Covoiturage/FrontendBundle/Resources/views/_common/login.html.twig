@@ -1,22 +1,31 @@
-<form method="post" action="#">
-    <div class="inner">
-        <div class="field_text">
-            <label for="user-login" class="label_title">Nom d'utilisateur</label>
-            <input type="text" name="log" id="user-login" value="" placeholder="Nom d'utilisateur" />
-        </div>
-        <div class="field_text">
-            <label for="user-pass" class="label_title">Mot de passe</label>
-            <input type="password" name="pwd" id="user-pass" value="" placeholder="Mot de passe" />
-        </div>
-        <div class="divider"></div>
-        <div class="rowRemember">
-            <div class="forgetmenot input_styled checklist">
-                <div class="rowCheckbox"><input type="checkbox" name="remember" id="remember" value="" checked><label for="remember">Se souvenir de moi</label></div>
-            </div>
-            <span class="forget-password"><a href="#">J'ai oublié mon mot de passe?</a></span>
-        </div>
-    </div>
-    <div class="rowSubmit clearfix">
-        <span class="btn btn-icon btn-icon-right btn-icon-login btn-green"><input type="submit" name="login-submit" id="login-submit" value="Accédez à votre compte" /></span>
-    </div>
-</form>
+
+
+
+                {% block fos_user_content %}
+                    <form action="{{ path("fos_user_security_check") }}" class="panel-body wrapper-lg" method="post">
+
+                        <input type="hidden" name="_csrf_token" value={{ csrf }} />
+
+                        <div class="form-group">
+                            <label class="control-label">Login</label>
+                            <input type="text" id="username" name="_username" value="" required="required" placeholder="Login" class="form-control input-lg">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Mot de passe</label>
+                            <input type="password" id="password" name="_password" required="required" placeholder="Mot de passe" class="form-control input-lg">
+                        </div>
+
+
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />Se souvenir de moi
+                            </label>
+                        </div>
+
+                        <a href={{ path('fos_user_resetting_request') }} class="pull-right m-t-xs"><small>Mot de passe oublié?</small></a>
+                        <button type="submit" id="_submit" name="_submit" class="btn btn-icon btn-icon-left btn-icon-checkout btn-green"><span>Se Connecter</span></button>
+
+                    </form>
+                {% endblock fos_user_content %}
