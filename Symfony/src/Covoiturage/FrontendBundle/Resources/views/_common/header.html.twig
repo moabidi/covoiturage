@@ -12,6 +12,9 @@
                 <a href="{{ path('fos_user_registration_register') }}" class="btn btn-icon btn-icon-left btn-icon-checkout btn-red"  style="outline: medium none;" ><span>S'inscrire</span></a>
             <button type="button" class="btn btn-icon btn-icon-left btn-icon-login btn-green" href="#connexion-box" hidefocus="true" style="outline: medium none;" id="btn-connexion" data-toggle="modal" data-target="#loginModal"><span>Se connecter</span></button>
             {% endif %}
+            {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-icon btn-icon-left btn-icon-login btn-green" href="#connexion-box" hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Se déconnecter</span></a>
+            {% endif %}
         </div>
         <!--/ User Menu -->
     </div>
