@@ -1,7 +1,25 @@
 {% extends 'CovoiturageFrontendBundle::layout.html.twig' %}
 
 {%  block content %}
+<div class="price-list">
+        <ul class="price-top clearfix">
+            <li class="price-content">Trajets</li>
+            <li class="price">Pl.libres & Prix</li>
+            <li class="price-reserve">Réservation</li>
+        </ul>
+</div>
     {% for voyage in list_voyages %}
         {% include 'CovoiturageFrontendBundle:line:voyage.html.twig' with {'voyage':voyage} %}
     {% endfor %}
+
+<ul class="pagination">
+    <li><a href="#" hidefocus="true" style="outline: medium none;">‹</a></li>
+    <li><a href="#" hidefocus="true" style="outline: medium none;">1</a></li>
+    <li class="active"><a href="#" hidefocus="true" style="outline: medium none;">2</a></li>
+    <li><a href="#" hidefocus="true" style="outline: medium none;">3</a></li>
+    <li class="disabled"><a href="#" hidefocus="true" style="outline: medium none;">…</a></li>
+    <li><a href="#" hidefocus="true" style="outline: medium none;">15</a></li>
+    <li><a href="#" hidefocus="true" style="outline: medium none;">16</a></li>
+    <li><a href="#" hidefocus="true" style="outline: medium none;">›</a></li>
+</ul>
 {% endblock %}
