@@ -65,7 +65,7 @@ class PlaceController extends Controller{
     {
         $idDelegation = $request->request->get('idPays');
         if (is_numeric($idDelegation)){
-            $listDelegations = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Localite')->matching( new Criteria( new Expr\Comparison( "IdDelegation",Expr\Comparison::EQ,$idDelegation)));
+            $listDelegations = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Localite')->matching( new Criteria( new Expr\Comparison( "idDelegation",Expr\Comparison::EQ,$idDelegation)));
             return $this->render('CovoiturageFrontendBundle:_common:list_options.html.twig', array(
                 'list_options' => $listDelegations,
                 'select_field' => 'localite'

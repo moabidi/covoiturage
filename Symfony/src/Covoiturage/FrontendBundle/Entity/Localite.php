@@ -29,15 +29,14 @@ class Localite
     private $name;
 
     /**
-     * @var integer
+     * @var \Delegation
      *
-     * @ORM\Column(name="id_delegation", type="integer", nullable=false)
      * @ORM\ManyToOne(targetEntity="Delegation")
      * @ORM\JoinColumns({
-     *      @ORM\JoinColumn(name="id_delegation", referencedColumnName="name")
+     *      @ORM\JoinColumn(name="id_delegation", referencedColumnName="id")
      * })
      */
-    private $IdDelegation;
+    private $idDelegation;
     private $delegation;
 
 
@@ -82,7 +81,7 @@ class Localite
      */
     public function setDelegationId($IdDelegation)
     {
-        $this->delegationId = $IdDelegation;
+        $this->idDelegation = $IdDelegation;
     
         return $this;
     }
@@ -94,6 +93,6 @@ class Localite
      */
     public function getDelegationId()
     {
-        return $this->delegationId;
+        return $this->idDelegation;
     }
 }
