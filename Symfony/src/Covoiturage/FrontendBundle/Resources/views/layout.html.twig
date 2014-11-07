@@ -16,7 +16,7 @@
                     <div class="col-sm-4">
                         <!-- Reservation Form -->
                         <div class="widget-container widget-reservation boxed boxed-blue green-line">
-                            <h3 class="widget-title">Recherche rapide</h3>
+                            <h3 class="widget-title">Recherche Rapide</h3>
                             {% include 'CovoiturageFrontendBundle:_common:search.html.twig' %}
                         </div>
                         <!--/ Reservation Form -->
@@ -25,36 +25,15 @@
                             {% include 'CovoiturageFrontendBundle:_common:post.html.twig' %}
                         </div>
                         <!--/ post item -->
-                        <!-- Login widget -->
                         <div class="widget-container widget-login boxed blue-line">
                             <h3 class="widget-title"><span>Connexion<strong>utilisateur</strong></span></h3>
-                            {% include 'CovoiturageFrontendBundle:_common:login.html.twig' %}
+
                         </div>
-                        <!--/ Login widget -->
                     </div>
-                    <div class="col-sm-8">
-                        <!-- Price List -->
-                        <div class="price-list boxed">
-                            <ul class="price-top clearfix">
-                                <li class="price-content">Trajets</li>
-                                <li class="price">Pl.libres & Prix</li>
-                                <li class="price-reserve">Reservation</li>
-                            </ul>
+                    <div class="col-sm-8 boxed pdng-10">
+
                             {% block content %}{% endblock %}
-                        </div>
-                        <!--/ Price List -->
-                        <!-- pagination -->
-                        <ul class="pagination">
-                            <li><a href="#" hidefocus="true" style="outline: medium none;">‹</a></li>
-                            <li><a href="#" hidefocus="true" style="outline: medium none;">1</a></li>
-                            <li class="active"><a href="#" hidefocus="true" style="outline: medium none;">2</a></li>
-                            <li><a href="#" hidefocus="true" style="outline: medium none;">3</a></li>
-                            <li class="disabled"><a href="#" hidefocus="true" style="outline: medium none;">…</a></li>
-                            <li><a href="#" hidefocus="true" style="outline: medium none;">15</a></li>
-                            <li><a href="#" hidefocus="true" style="outline: medium none;">16</a></li>
-                            <li><a href="#" hidefocus="true" style="outline: medium none;">›</a></li>
-                        </ul>
-                        <!--/ pagination -->
+
                     </div>
                 </div>
                 <!--/ .row-->
@@ -62,8 +41,30 @@
             <!--/ container -->
         </div>
     </div>
+
+    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+    <!-- Modal Login -->
+    <div class="modal" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Connexion</h4>
+                </div>
+                <div class="modal-body">
+        {{ render(controller('CovoiturageFrontendBundle:User:login')) }}
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+        <!-- End Modal Login -->
+    {% endif %}
+
+    {% block javascripts %}
+        {% include 'CovoiturageFrontendBundle:_common:loadjs.html.twig' %}
+    {% endblock %}
 </body>
-{% block javascripts %}
-    {% include 'CovoiturageFrontendBundle:_common:loadjs.html.twig' %}
-{% endblock %}
 </html>

@@ -1,6 +1,10 @@
 covoiturage_frontend_homepage:
     pattern:  /home
     defaults: { _controller: CovoiturageFrontendBundle:Default:index }
+
+covoiturage_frontend_voyage_publish:
+    pattern:  /publish
+    defaults: { _controller: CovoiturageFrontendBundle:Voyage:publish }
 ######Gov list root###########
 covoiturage_frontend_getGouvernorats:
     pattern:  /list/gouvernorats
