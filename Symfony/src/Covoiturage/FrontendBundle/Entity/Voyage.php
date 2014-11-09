@@ -4,6 +4,7 @@ namespace Covoiturage\FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+// This class represents a Navette
 /**
  * Voyage
  *
@@ -24,7 +25,7 @@ class Voyage
     /**
      * @var string
      *
-     * @ORM\Column(name="horaire", type="string", length=16, nullable=true)
+     * @ORM\Column(name="horaire", type="time", length=16, nullable=true)
      */
     private $horaire;
 
@@ -45,7 +46,7 @@ class Voyage
     /**
      * @var integer
      *
-     * @ORM\Column(name="frequence", type="integer", nullable=true)
+     * @ORM\Column(name="frequence", type="string",length=255, nullable=true)
      */
     private $frequence;
 
@@ -70,6 +71,18 @@ class Voyage
     private $idDepart;
 
     /**
+     * @var \Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_utilsateur", referencedColumnName="id")
+     * })
+     */
+    private $utilisateur;
+
+
+
+    /**
      * @var \Voiture
      *
      * @ORM\ManyToOne(targetEntity="Voiture")
@@ -78,6 +91,11 @@ class Voyage
      * })
      */
     private $idVoiture;
+
+    public function __construct()
+    {
+        $this->horaire = new \Datetime();
+    }
 
 
 
