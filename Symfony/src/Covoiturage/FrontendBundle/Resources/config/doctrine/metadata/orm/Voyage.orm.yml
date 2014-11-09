@@ -29,7 +29,7 @@ Voyage:
             nullable: true
     manyToOne:
         idArrive:
-            targetEntity: Delegation
+            targetEntity: Localite
             cascade: {  }
             mappedBy: null
             inversedBy: arrive
@@ -38,7 +38,7 @@ Voyage:
                     referencedColumnName: id
             orphanRemoval: false
         idDepart:
-            targetEntity: Delegation
+            targetEntity: Localite
             cascade: {  }
             mappedBy: null
             inversedBy: depart

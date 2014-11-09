@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-6">
         <!-- Logo -->
-        <h1 class="logo"><a href="#"><img src="{{ asset('bundles/covoituragefrontend/images/logo.png') }}" class="img-responsive" alt="Covoiturage.tn"/></a></h1>
+        <h1 class="logo"><a href="#"><img src="{{ asset('bundles/covoituragefrontend/images/logo.png') }}" class="img-responsive" alt="Navette.tn"/></a></h1>
         <!--/ Logo -->
     </div>
     <div class="col-sm-6">
@@ -13,7 +13,9 @@
             <button type="button" class="btn btn-icon btn-icon-left btn-icon-login btn-green" href="#connexion-box" hidefocus="true" style="outline: medium none;" id="btn-connexion" data-toggle="modal" data-target="#loginModal"><span>Se connecter</span></button>
             {% endif %}
             {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-icon btn-icon-left btn-icon-login btn-green" href="#connexion-box" hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Se déconnecter</span></a>
+                <a href="{{ path('covoiturage_frontend_voyage_publish') }}" class="btn btn-icon btn-icon-left btn-icon-pencil btn-blue"  hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Publier</span></a>
+                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-icon btn-icon-left btn-icon-pencil btn-green"  hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Mes navettes</span></a>
+                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-icon btn-icon-left btn-icon-checkout btn-green" title="Se déconnecter" hidefocus="true" style="outline: medium none;" id="btn-connexion">&nbsp;</a>
             {% endif %}
         </div>
         <!--/ User Menu -->

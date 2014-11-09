@@ -14,16 +14,14 @@ Immobilier\ManagerBundle\Entity\Localite:
             length: 200
             fixed: false
             nullable: false
-        delegationId:
-            type: integer
-            unsigned: false
-            nullable: false
-            column: id_delegation
     manyToOne:
-        delegation:
+        idDelegation:
             targetEntity: Delegation
-            inversedBy: localites
-            joinColumn:
-                name: id_delegation
-                referencedColumnName: id
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                id_delegation:
+                    referencedColumnName: id
+            orphanRemoval: false
     lifecycleCallbacks: {  }

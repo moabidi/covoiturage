@@ -1,5 +1,39 @@
 jQuery(document).ready(function() {
 
+    $('#search').click(function(){
+        var sgov = $('#started_place select.annonce_idGouvernorat').val();
+        var sdel = $('#started_place select.annonce_idDelegation').val();
+        var sloc = $('#started_place select.annonce_idLocalite').val();
+        var agov = $('#arrived_place select.annonce_idGouvernorat').val();
+        var adel = $('#arriveded_place select.annonce_idDelegation').val();
+        var aloc = $('#arrived_place select.annonce_idLocalite').val();
+        var horaire = $('#horaire').val();
+        var nbPlace = $('#nbPlace').val();
+        var params ='?';
+
+        if( sloc != null && sloc !='')
+            params += '&sloc='+sloc;
+        else if( sdel != null && sdel !='')
+            params += '&sdel='+sdel;
+        else if( sgov != null && sgov != '')
+            params += '&sgov='+sgov;
+
+        if( aloc != null && aloc !='')
+            params += '&aloc='+aloc;
+        else if( adel != null && adel !='')
+            params += '&adel='+adel;
+        else if( agov != null && agov != '')
+            params += '&agov='+agov;
+
+        if( horaire != null)
+            params += '&horaire='+horaire;
+        if( nbPlace != null)
+            params += '&nbPlace='+nbPlace;
+
+        location.href = '/search'+params;
+        return false;
+    });
+
     $('#annonce_idPays').on('change',function(){
         var select = $(this);
         var idPays = select.val();
@@ -24,6 +58,9 @@ jQuery(document).ready(function() {
     });
     $('body').delegate('#started_place select.annonce_idGouvernorat','change',function(){
         $('#started_place .annonce_idDelegation').parent().css("display","none");
+        $('#started_place .annonce_idLocalite').parent().css("display","none");
+        $('#started_place .annonce_idDelegation').html('');
+        $('#started_place .annonce_idLocalite').html('');
         var select = $(this);
         var idPays = select.val();
         var xmlRquest = $.ajax({
@@ -70,6 +107,9 @@ jQuery(document).ready(function() {
 
     $('body').delegate('#arrived_place select.annonce_idGouvernorat','change',function(){
         $('#arrived_place .annonce_idDelegation').parent().css("display","none");
+        $('#arrived_place .annonce_idLocalite').parent().css("display","none");
+        $('#arrived_place .annonce_idDelegation').html('');
+        $('#arrived_place .annonce_idLocalite').html('');
         var select = $(this);
         var idPays = select.val();
         var xmlRquest = $.ajax({

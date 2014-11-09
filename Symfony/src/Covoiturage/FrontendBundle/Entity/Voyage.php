@@ -50,9 +50,9 @@ class Voyage
     private $frequence;
 
     /**
-     * @var \Delegation
+     * @var \Localite
      *
-     * @ORM\ManyToOne(targetEntity="Delegation")
+     * @ORM\ManyToOne(targetEntity="Localite")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_arrive", referencedColumnName="id")
      * })
@@ -60,9 +60,9 @@ class Voyage
     private $idArrive;
 
     /**
-     * @var \Delegation
+     * @var \Localite
      *
-     * @ORM\ManyToOne(targetEntity="Delegation")
+     * @ORM\ManyToOne(targetEntity="Localite")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_depart", referencedColumnName="id")
      * })
