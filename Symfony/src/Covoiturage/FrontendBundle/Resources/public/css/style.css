@@ -294,6 +294,7 @@ h6.foo {
     background: none;
 }
 .btn span,
+.btn-submit,
 .btn input {
     display:block;
     padding: 0 25px;

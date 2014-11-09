@@ -82,6 +82,7 @@ class Voyage
 
 
 
+
     /**
      * @var \Voiture
      *
@@ -204,10 +205,10 @@ class Voyage
     /**
      * Set idArrive
      *
-     * @param \Covoiturage\FrontendBundle\Entity\Delegation $idArrive
+     * @param \Covoiturage\FrontendBundle\Entity\Localite $idArrive
      * @return Voyage
      */
-    public function setIdArrive(\Covoiturage\FrontendBundle\Entity\Delegation $idArrive = null)
+    public function setIdArrive(\Covoiturage\FrontendBundle\Entity\Localite $idArrive = null)
     {
         $this->idArrive = $idArrive;
     
@@ -217,7 +218,7 @@ class Voyage
     /**
      * Get idArrive
      *
-     * @return \Covoiturage\FrontendBundle\Entity\Delegation 
+     * @return \Covoiturage\FrontendBundle\Entity\Localite
      */
     public function getIdArrive()
     {
@@ -227,10 +228,10 @@ class Voyage
     /**
      * Set idDepart
      *
-     * @param \Covoiturage\FrontendBundle\Entity\Delegation $idDepart
+     * @param \Covoiturage\FrontendBundle\Entity\Localite $idDepart
      * @return Voyage
      */
-    public function setIdDepart(\Covoiturage\FrontendBundle\Entity\Delegation $idDepart = null)
+    public function setIdDepart(\Covoiturage\FrontendBundle\Entity\Localite $idDepart = null)
     {
         $this->idDepart = $idDepart;
     
@@ -240,7 +241,7 @@ class Voyage
     /**
      * Get idDepart
      *
-     * @return \Covoiturage\FrontendBundle\Entity\Delegation 
+     * @return \Covoiturage\FrontendBundle\Entity\Localite
      */
     public function getIdDepart()
     {
@@ -268,5 +269,21 @@ class Voyage
     public function getIdVoiture()
     {
         return $this->idVoiture;
+    }
+
+    /**
+     * @param \Utilisateur $utilisateur
+     */
+    public function setUtilisateur(Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+    }
+
+    /**
+     * @return \Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

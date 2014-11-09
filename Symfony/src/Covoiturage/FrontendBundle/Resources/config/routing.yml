@@ -3,8 +3,9 @@ covoiturage_frontend_homepage:
     defaults: { _controller: CovoiturageFrontendBundle:Default:index }
 
 covoiturage_frontend_voyage_publish:
-    pattern:  /publish
+    pattern:  /navette/publish
     defaults: { _controller: CovoiturageFrontendBundle:Voyage:publish }
+
 ######Gov list root###########
 covoiturage_frontend_getGouvernorats:
     pattern:  /list/gouvernorats
