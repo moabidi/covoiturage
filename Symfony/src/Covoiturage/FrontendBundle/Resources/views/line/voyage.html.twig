@@ -6,7 +6,7 @@
                 <div class="price-image"><img alt="" src="{{ asset('bundles/covoituragefrontend/images/temp/avatar.jpg') }}" class="img-circle"></div>
             </div>
             <div class="price-content-right">
-                <span class="price-info">{{ voyage.horaire }}</span>
+                <span class="price-info">{{ voyage.horaire|date }}</span>
                 <h2 class="price-title"><a href="#">{{ voyage.idDepart.name }} → {{ voyage.idArrive.name }}</a></h2>
                 <div class="price-rating">
                     <div class="rating clearfix">
@@ -18,9 +18,8 @@
                     </div>
                 </div>
                 <div class="price-desc hidden-lg">
-                    <p>Pseudo  : {{ voyage.idVoiture.idPersonne.pseudo }}<br />
-                        Age :  {{ voyage.idVoiture.idPersonne.age }} ans<br />
-                        Numéro portable : {{ voyage.idVoiture.idPersonne.tel }}<br />
+                    <p>Pseudo  : {{ voyage.getUtilisateur().getLogin() }}<br />
+                        Email : {{ voyage.getUtilisateur().getEmail() }}<br />
                     </p>
                 </div>
             </div>
