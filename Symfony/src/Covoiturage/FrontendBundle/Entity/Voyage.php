@@ -4,6 +4,7 @@ namespace Covoiturage\FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+// This class represents a Navette
 /**
  * Voyage
  *
@@ -24,7 +25,7 @@ class Voyage
     /**
      * @var string
      *
-     * @ORM\Column(name="horaire", type="string", length=16, nullable=true)
+     * @ORM\Column(name="horaire", type="time", length=16, nullable=true)
      */
     private $horaire;
 
@@ -45,7 +46,7 @@ class Voyage
     /**
      * @var integer
      *
-     * @ORM\Column(name="frequence", type="integer", nullable=true)
+     * @ORM\Column(name="frequence", type="string",length=255, nullable=true)
      */
     private $frequence;
 
@@ -70,6 +71,19 @@ class Voyage
     private $idDepart;
 
     /**
+     * @var \Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_utilsateur", referencedColumnName="id")
+     * })
+     */
+    private $utilisateur;
+
+
+
+
+    /**
      * @var \Voiture
      *
      * @ORM\ManyToOne(targetEntity="Voiture")
@@ -78,6 +92,11 @@ class Voyage
      * })
      */
     private $idVoiture;
+
+    public function __construct()
+    {
+        $this->horaire = new \Datetime();
+    }
 
 
 
@@ -186,10 +205,10 @@ class Voyage
     /**
      * Set idArrive
      *
-     * @param \Covoiturage\FrontendBundle\Entity\Delegation $idArrive
+     * @param \Covoiturage\FrontendBundle\Entity\Localite $idArrive
      * @return Voyage
      */
-    public function setIdArrive(\Covoiturage\FrontendBundle\Entity\Delegation $idArrive = null)
+    public function setIdArrive(\Covoiturage\FrontendBundle\Entity\Localite $idArrive = null)
     {
         $this->idArrive = $idArrive;
     
@@ -199,7 +218,7 @@ class Voyage
     /**
      * Get idArrive
      *
-     * @return \Covoiturage\FrontendBundle\Entity\Delegation 
+     * @return \Covoiturage\FrontendBundle\Entity\Localite
      */
     public function getIdArrive()
     {
@@ -209,10 +228,10 @@ class Voyage
     /**
      * Set idDepart
      *
-     * @param \Covoiturage\FrontendBundle\Entity\Delegation $idDepart
+     * @param \Covoiturage\FrontendBundle\Entity\Localite $idDepart
      * @return Voyage
      */
-    public function setIdDepart(\Covoiturage\FrontendBundle\Entity\Delegation $idDepart = null)
+    public function setIdDepart(\Covoiturage\FrontendBundle\Entity\Localite $idDepart = null)
     {
         $this->idDepart = $idDepart;
     
@@ -222,7 +241,7 @@ class Voyage
     /**
      * Get idDepart
      *
-     * @return \Covoiturage\FrontendBundle\Entity\Delegation 
+     * @return \Covoiturage\FrontendBundle\Entity\Localite
      */
     public function getIdDepart()
     {
@@ -250,5 +269,21 @@ class Voyage
     public function getIdVoiture()
     {
         return $this->idVoiture;
+    }
+
+    /**
+     * @param \Utilisateur $utilisateur
+     */
+    public function setUtilisateur(Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+    }
+
+    /**
+     * @return \Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

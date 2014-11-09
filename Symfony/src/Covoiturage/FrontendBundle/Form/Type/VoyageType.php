@@ -21,7 +21,33 @@ class VoyageType extends AbstractType
     {
         //TODO: add the rest of the form
        $builder
-            ->add('horaire', 'text')
+            ->add('horaire', 'time')
+            ->add('prix', 'money')
+            ->add('nbPlace', 'choice', array(
+                   'choices'=> array( '1' =>'1',
+                                       '2' =>'2',
+                                       '3' =>'3',
+                                       '4' =>'4',
+               ),
+               'multiple' => false,
+            ))
+            ->add('frequence', 'choice', array(
+                    'choices' => array('semaine' =>'Jour de semaine',
+                                        'weekend' =>'En week-end'
+                                )
+                 ,
+                'multiple' => false,
+            ))
+            ->add('idArrive', 'entity',array(
+                    'class'=>'CovoiturageFrontendBundle:Localite',
+                    'required'=>true,
+                    'multiple'=>false
+           ))
+           ->add('idDepart', 'entity',array(
+           'class'=> 'CovoiturageFrontendBundle:Localite',
+               'required'=>true,
+               'multiple'=>false
+           ))
             ->add('publish','submit')
            ;
     }

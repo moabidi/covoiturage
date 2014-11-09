@@ -27,12 +27,14 @@ class VoyageController extends Controller
 
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $voyage->setUtilisateur($user);
             $em->persist($voyage);
             $em->flush();
 
-            //TODO:
+            //@TODO:
             // add session message
-            // redirect to Voyage view
+            // redirect to Voyage(navette) view
         }
 
         return $this->render('CovoiturageFrontendBundle:Voyage:publish.html.twig',
