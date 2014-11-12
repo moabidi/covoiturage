@@ -6,6 +6,10 @@ covoiturage_frontend_voyage_publish:
     pattern:  /navette/publish
     defaults: { _controller: CovoiturageFrontendBundle:Voyage:publish }
 
+covoiturage_frontend_voyage_modify:
+    pattern:  /navette/modify/{id}
+    defaults: { _controller: CovoiturageFrontendBundle:Voyage:modify }
+
 ######Gov list root###########
 covoiturage_frontend_getGouvernorats:
     pattern:  /list/gouvernorats

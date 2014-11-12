@@ -44,5 +44,32 @@ class VoyageController extends Controller
         );
     }
 
+    public function modifyAction(Voyage $voyage)
+    {
+
+        $form = $this->get('form.factory')->create(new VoyageType(), $voyage);
+
+        $request = $this->get('request');
+
+        if ($form->handleRequest($request)->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $user = $this->getUser();
+            $voyage->setUtilisateur($user);
+            $em->persist($voyage);
+            $em->flush();
+
+            //@TODO:
+            // add session message
+            // redirect to Voyage(navette) view
+        }
+
+        return $this->render('CovoiturageFrontendBundle:Voyage:modify.html.twig',
+            array(
+                 'voyage' => $voyage,
+                'form' => $form->createView()
+            )
+        );
+    }
+
 
 }
