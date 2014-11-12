@@ -32,7 +32,7 @@ class Voyage
     /**
      * @var integer
      *
-     * @ORM\Column(name="prix", type="integer", nullable=true)
+     * @ORM\Column(name="prix", type="float", nullable=true)
      */
     private $prix;
 
