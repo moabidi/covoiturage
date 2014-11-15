@@ -1,6 +1,6 @@
 covoiturage_frontend_homepage:
-    pattern:  /home
-    defaults: { _controller: CovoiturageFrontendBundle:Default:index }
+    pattern:  /home/{page}
+    defaults: { _controller: CovoiturageFrontendBundle:Default:index,page:1 }
 
 covoiturage_frontend_voyage_publish:
     pattern:  /navette/publish
@@ -13,6 +13,10 @@ covoiturage_frontend_voyage_modify:
 covoiturage_frontend_voyage_delete:
     pattern:  /navette/delete/{id}
     defaults: { _controller: CovoiturageFrontendBundle:Voyage:delete }
+
+covoiturage_frontend_voyage_user:
+    pattern:  /navette/mes-navettes/{page}
+    defaults: { _controller: CovoiturageFrontendBundle:User:voyages,page:1 }
 
 ######Gov list root###########
 covoiturage_frontend_getGouvernorats:

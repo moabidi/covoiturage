@@ -13,15 +13,25 @@ use Doctrine\ORM\Query\Expr as QueryExpr;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction($page)
     {
-        $listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')->findAll();
-        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig', array('list_voyages' => $listOffres));
-    }
+        $maxPerPage =$this->container->getParameter('max_per_page');
+        $listVoyages = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
+            ->getList($page, $maxPerPage);
 
-    public function registerAction()
-    {
+        $voyagesCount = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
+            ->countVoyages();
+        $pagination = array(
+            'page' => $page,
+            'route' => 'covoiturage_frontend_homepage',
+            'pages_count' => ceil($voyagesCount / $maxPerPage),
+            'route_params' => array('page'=>$page)
+        );
 
+        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                       array('list_voyages'    => $listVoyages,
+                            'pagination'      => $pagination,
+                    )
+        );
     }
 
     /**
