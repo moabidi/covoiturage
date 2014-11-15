@@ -38,16 +38,6 @@ class Utilisateur extends BaseUser
         // your own logic
     }
 
-    public function getLogin()
-    {
-        return $this->getLogin();
-    }
-
-    public function getEmail()
-    {
-        return $this->getEmail();
-    }
-
     /**
      * @param int $tel
      */
