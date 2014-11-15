@@ -14,6 +14,10 @@ covoiturage_frontend_voyage_delete:
     pattern:  /navette/delete/{id}
     defaults: { _controller: CovoiturageFrontendBundle:Voyage:delete }
 
+covoiturage_frontend_voyage_user:
+    pattern:  /navette/mes-navettes/{page}
+    defaults: { _controller: CovoiturageFrontendBundle:User:voyages,page:1 }
+
 ######Gov list root###########
 covoiturage_frontend_getGouvernorats:
     pattern:  /list/gouvernorats
