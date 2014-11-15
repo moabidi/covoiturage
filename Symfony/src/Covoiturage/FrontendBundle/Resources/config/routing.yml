@@ -1,6 +1,6 @@
 covoiturage_frontend_homepage:
-    pattern:  /home
-    defaults: { _controller: CovoiturageFrontendBundle:Default:index }
+    pattern:  /home/{page}
+    defaults: { _controller: CovoiturageFrontendBundle:Default:index,page:1 }
 
 covoiturage_frontend_voyage_publish:
     pattern:  /navette/publish
