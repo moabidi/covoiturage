@@ -26,3 +26,4 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/navette/publish, role: ROLE_USER }
+        - { path: ^/navette/mes-navettes, role: ROLE_USER }
