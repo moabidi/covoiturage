@@ -31,6 +31,11 @@
             <span>par personne</span>
         </li>
         <li class="price-reserve">
+
+            {{ render(controller(
+            'CovoiturageFrontendBundle:Reservation:reservation',
+            { 'voyage': voyage }
+            )) }}
             <a href="{{ path('covoiturage_frontend_voyage_show',{id:voyage.getId()}) }}" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
         </li>
     </ul>
