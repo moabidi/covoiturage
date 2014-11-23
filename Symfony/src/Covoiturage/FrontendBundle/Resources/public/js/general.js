@@ -154,3 +154,24 @@ jQuery(document).ready(function() {
         });
     });
 });
+
+function reservation(voyage_id) {
+
+    $.ajax({
+        type: "POST",
+        url: urlVoyageResrvation,
+        dataType: 'json',
+        data: {
+            voyageId: voyage_id
+        },
+        success: function(data,status) {
+            if (data.status == "200") {
+                alert('Saved!');
+            }
+            if (data.status == "302") {
+                window.location.href = data.url;
+            }
+        }
+
+    });
+}

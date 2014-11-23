@@ -73,7 +73,7 @@ class Reservation
      * @param Voyage $voyage
      * @return Reservation
      */
-    public function setVoyage($voyage)
+    public function setVoyage(Voyage $voyage)
     {
         $this->voyage = $voyage;
     
@@ -96,7 +96,7 @@ class Reservation
      * @param Utilisateur $utilisateur
      * @return Reservation
      */
-    public function setUtilisateur($utilisateur)
+    public function setUtilisateur(Utilisateur $utilisateur)
     {
         $this->utilisateur = $utilisateur;
     
