@@ -1,3 +1,6 @@
-{% if nb_places >  voyage_reservations %}
-    <a href="{{ path('covoiturage_frontend_voyage_show',{id:voyage_id}) }}" class="btn btn-middle btn-icon btn-icon-right"><span>Reservation</span></a>
+{% if nb_places >  voyage_reservations and user_reservations == 0 %}
+    <script type="application/javascript">
+        var urlVoyageResrvation = '{{ path("covoiturage_frontend_voyage_reservation") }}';
+    </script>
+    <button type="button" onclick="reservation({{ voyage_id }})" class="btn btn-middle btn-icon btn-icon-right"><span>Reservation</span></button>
 {% endif %}

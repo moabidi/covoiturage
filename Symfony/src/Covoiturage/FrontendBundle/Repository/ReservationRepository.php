@@ -39,4 +39,19 @@ class ReservationRepository extends EntityRepository
         return $count;
     }
 
+    public function getUserReservations($voyage, $user, $status = Reservation::PENDING )
+    {
+        $qb = $this->_em->createQueryBuilder()
+            ->select('count(reservation.id)')
+            ->from('CovoiturageFrontendBundle:Reservation','reservation')
+            ->where('reservation.status = '.$status)
+            ->where('reservation.voyage = '.$voyage)
+            ->where('reservation.utilisateur = '.$user)
+        ;
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
 } 
