@@ -153,4 +153,87 @@ jQuery(document).ready(function() {
             alert("Request failed: " + textStatus);
         });
     });
+    $('body').delegate('#list_stations select.annonce_idGouvernorat','change',function(){
+        $('#list_stations .annonce_idDelegation').parent().css("display","none");
+        $('#list_stations .annonce_idLocalite').parent().css("display","none");
+        $('#list_stations .annonce_idDelegation').html('');
+        $('#list_stations .annonce_idLocalite').html('');
+        var select = $(this);
+        var idPays = select.val();
+        var xmlRquest = $.ajax({
+            type: "post",
+            url: "/list/delegations",
+            data: {idPays: idPays}
+        });
+        xmlRquest.done(function(msg){
+            var patt1 = /(<select)+(.)+(<\/select>)+/i;
+            var resultOption = msg.match(patt1);
+            if( resultOption){
+                $('#list_stations .annonce_idDelegation').parent().html(resultOption[0]);
+                $('#list_stations .annonce_idDelegation').parent().css("display","block");
+            }
+        });
+        xmlRquest.fail(function(jqXHR, textStatus){
+            alert("Request failed: " + textStatus);
+        });
+    });
+    $('body').delegate('#list_stations select.annonce_idDelegation','change',function(){
+        $('#list_stations .annonce_idLocalite').parent().css("display","none");
+        var select = $(this);
+        var idPays = select.val();
+        var xmlRquest = $.ajax({
+            type: "post",
+            url: "/list/locations",
+            data: {idPays: idPays}
+        });
+        xmlRquest.done(function(msg){
+            var patt1 = /(<select)+(.)+(<\/select>)+/i;
+            var resultOption = msg.match(patt1);
+            if( resultOption){
+                $('#list_stations .annonce_idLocalite').parent().html(resultOption[0]);
+                $('#list_stations .annonce_idLocalite').parent().css("display","block");
+                /*$('select#annonce_idLocalite').chosen({
+                 disable_search_threshold: 10
+                 });*/
+            }
+        });
+        xmlRquest.fail(function(jqXHR, textStatus){
+            alert("Request failed: " + textStatus);
+        });
+    });
+
+    /*Start add stations*/
+    $("#register_station").click(function(){
+        if( $("#list_stations select.annonce_idGouvernorat").val() == '' ){
+            alert("Vous devez choisir la ville de cette station");
+        }else{
+            var gov = $("#list_stations select.annonce_idGouvernorat").val();
+            var del = $("#list_stations select.annonce_idDelegation").val();
+            var loc = $("#list_stations select.annonce_idLocalite").val();
+            var num = $("#sorted_station li").length +1;
+            var html = ''
+            html +='<li>Station n°'+num+' : - <input type="hidden" name="gouvernorat['+num+']" value="'+gov+'"/>'+ $("#list_stations select.annonce_idGouvernorat option:selected").text();
+            if( del != '' )
+                html += ' - <input type="hidden" name="delegation['+num+']" value="'+del+'"/>'+ $("#list_stations select.annonce_idDelegation option:selected").text();
+            if( loc != '' )
+                html += ' - <input type="hidden" name="localite['+num+']" value="'+loc+'"/>'+ $("#list_stations select.annonce_idLocalite option:selected").text();
+            html += '</li>'
+            $("#sorted_station").append(html);
+            $(this).css('display','none');
+            $('#add_station').css('display','block');
+            $("#list_stations select.annonce_idGouvernorat").val('');
+            $("#list_stations select.annonce_idGouvernorat").css('display','none');
+            $("#list_stations select.annonce_idDelegation").css('display','none');
+            $("#list_stations select.annonce_idLocalite").css('display','none');
+        }
+    });
+    $("#add_station").click(function(){
+        $("#list_stations select.annonce_idGouvernorat").css('display','block');
+        $(this).css('display','none');
+        $('#register_station').css('display','block');
+    });
+
+
+    /*End add stations*/
+
 });
