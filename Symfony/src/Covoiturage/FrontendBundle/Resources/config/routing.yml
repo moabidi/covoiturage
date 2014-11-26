@@ -17,6 +17,8 @@ covoiturage_frontend_voyage_delete:
 covoiturage_frontend_voyage_show:
     pattern:  /navette/{id}
     defaults: { _controller: CovoiturageFrontendBundle:Voyage:show }
+    requirements:
+        id: -?\d+
 
 covoiturage_frontend_voyage_user:
     pattern:  /navette/mes-navettes/{page}

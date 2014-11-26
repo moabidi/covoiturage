@@ -14,7 +14,7 @@
             {% endif %}
             {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
                 <a href="{{ path('covoiturage_frontend_voyage_publish') }}" class="btn btn-icon btn-icon-left btn-icon-pencil btn-blue"  hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Publier</span></a>
-                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-icon btn-icon-left btn-icon-pencil btn-green"  hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Mes navettes</span></a>
+                <a href="{{ path('covoiturage_frontend_voyage_user') }}" class="btn btn-icon btn-icon-left btn-icon-pencil btn-green"  hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Mes navettes</span></a>
                 <a href="{{ path('fos_user_security_logout') }}" class="btn btn-icon btn-icon-left btn-icon-checkout btn-green" title="Se déconnecter" hidefocus="true" style="outline: medium none;" id="btn-connexion">&nbsp;</a>
             {% endif %}
         </div>
