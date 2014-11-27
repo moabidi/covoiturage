@@ -7,92 +7,32 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Gouvernorat
  *
- * @ORM\Table(name="gouvernorat")
  * @ORM\Entity
  */
-class Gouvernorat
+class Gouvernorat extends Localite
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
-     */
-    private $name;
+    private $numGouv;
 
-    /**
-     * @var \Pays
-     *
-     * @ORM\ManyToOne(targetEntity="Pays")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_pays", referencedColumnName="id")
-     * })
-     */
-    private $idPays;
-
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
+    public function __construct($type = "Gouvernorat")
     {
-        return $this->id;
+        $this->setType($type);
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Gouvernorat
+     * @return mixed
      */
-    public function setName($name)
+    public function getNumGouv()
     {
-        $this->name = $name;
-    
-        return $this;
+        return $this->numGouv;
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @param mixed $numGouv
      */
-    public function getName()
+    public function setNumGouv($numGouv)
     {
-        return $this->name;
+        $this->numGouv = $numGouv;
     }
 
-    /**
-     * Set idPays
-     *
-     * @param \Covoiturage\FrontendBundle\Entity\Pays $idPays
-     * @return Gouvernorat
-     */
-    public function setIdPays(\Covoiturage\FrontendBundle\Entity\Pays $idPays = null)
-    {
-        $this->idPays = $idPays;
-    
-        return $this;
-    }
-
-    /**
-     * Get idPays
-     *
-     * @return \Covoiturage\FrontendBundle\Entity\Pays 
-     */
-    public function getIdPays()
-    {
-        return $this->idPays;
-    }
 }
