@@ -13,7 +13,7 @@ class Pays extends Localite
 
     private $countryCode;
 
-    public function __construct($type = "Pays")
+    public function __construct($type = "pays")
     {
         $this->setType($type);
     }

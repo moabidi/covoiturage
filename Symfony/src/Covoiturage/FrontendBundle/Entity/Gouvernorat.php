@@ -14,7 +14,7 @@ class Gouvernorat extends Localite
 
     private $numGouv;
 
-    public function __construct($type = "Gouvernorat")
+    public function __construct($type = "gouvernorat")
     {
         $this->setType($type);
     }

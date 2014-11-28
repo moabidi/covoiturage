@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Delegation extends Localite
 {
 
-    public function __construct($type = "Delegation")
+    public function __construct($type = "delegation")
     {
         $this->setType($type);
     }
