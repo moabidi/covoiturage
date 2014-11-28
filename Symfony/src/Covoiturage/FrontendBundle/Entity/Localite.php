@@ -38,14 +38,14 @@ class Localite
     /**
      * @var float
      *
-     * @ORM\Column(name="latitude", type="float", length=20, nullable=false)
+     * @ORM\Column(name="latitude", type="float", length=20, nullable=true)
      */
     private $latitude;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="longitude", type="float", length=20, nullable=false)
+     * @ORM\Column(name="longitude", type="float", length=20, nullable=true)
      */
     private $longitude;
 
