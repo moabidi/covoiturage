@@ -2,6 +2,7 @@
 
 namespace Covoiturage\FrontendBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 // This class represents a Navette
@@ -80,7 +81,10 @@ class Voyage
      */
     private $utilisateur;
 
-
+    /**
+     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="voyage")
+     **/
+    private $reservations;
 
 
     /**
@@ -96,6 +100,7 @@ class Voyage
     public function __construct()
     {
         $this->horaire = new \Datetime();
+        $this->reservations = new ArrayCollection();
     }
 
 
@@ -272,7 +277,8 @@ class Voyage
     }
 
     /**
-     * @param \Utilisateur $utilisateur
+     * Set utilisateur
+     * @param Utilisateur $utilisateur
      */
     public function setUtilisateur(Utilisateur $utilisateur)
     {
@@ -286,4 +292,47 @@ class Voyage
     {
         return $this->utilisateur;
     }
+
+    /**
+     * @return ArrayCollection() Reservations
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * set reservations
+     * @param Reservation $reservations
+     */
+    public function setReservations(Reservation $reservations)
+    {
+        $this->reservations = $reservations;
+    }
+
+    public function getNbReservations()
+    {
+        return count($this->reservations);
+    }
+
+    public function getFreeReservations()
+    {
+
+        if ($this->getNbReservations() == 0) {
+            return $this->getNbPlace();
+        }
+        $free = 0;
+        $count = 0;
+        $reservations = $this->getReservations();
+        foreach($reservations as $reservation) {
+            if ($reservation->getStatus() != Reservation::CONFIRMED) {
+                $count++;
+            }
+        }
+        $free = $this->nbPlace - $count;
+        if ($free < 0) $free = 0;
+
+        return $free;
+    }
+
 }

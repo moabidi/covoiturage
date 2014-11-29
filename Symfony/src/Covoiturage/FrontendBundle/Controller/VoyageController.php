@@ -99,9 +99,18 @@ class VoyageController extends Controller
             throw new NotFoundHttpException('Introuvable');
         }
 
+        $userReservations[$voyage->getId()] = 0;
+        $user = $this->getUser();
+        if ($user){
+            $userReservations[$voyage->getId()] = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Reservation')
+                ->getUserReservations($voyage->getId(), $user->getId());
+
+        }
+
         return $this->render('CovoiturageFrontendBundle:Voyage:show.html.twig',
             array(
-                'voyage' => $voyage
+                'voyage' => $voyage,
+                'user_reservations'=>$userReservations
             )
         );
 

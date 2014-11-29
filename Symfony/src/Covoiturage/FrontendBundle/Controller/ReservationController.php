@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class ReservationController extends Controller
 {
 
+    //@Deprectad
     public function reservationAction($voyage)
     {
         $voyagesRservations = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Reservation')
@@ -70,6 +71,9 @@ class ReservationController extends Controller
         $reservation->setStatus(Reservation::PENDING);
         $em->persist($reservation);
         $em->flush();
+
+        //@TODO:
+        //send confirmation/notification email for both users
 
 
 
