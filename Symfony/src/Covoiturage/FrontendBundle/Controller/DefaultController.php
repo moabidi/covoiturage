@@ -27,10 +27,21 @@ class DefaultController extends Controller
             'pages_count' => ceil($voyagesCount / $maxPerPage),
             'route_params' => array('page'=>$page)
         );
+        $user = $this->getUser();
+        foreach($listVoyages as $voyage) {
+            $userReservations[$voyage->getId()] = 0;
+            if ($user){
+                $userReservations[$voyage->getId()] = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Reservation')
+                    ->getUserReservations($voyage->getId(), $user->getId());
+
+            }
+        }
+
 
         return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                       array('list_voyages'    => $listVoyages,
-                            'pagination'      => $pagination,
-                    )
+                                'pagination'      => $pagination,
+                                'user_reservations'=>$userReservations
+            )
         );
     }
 

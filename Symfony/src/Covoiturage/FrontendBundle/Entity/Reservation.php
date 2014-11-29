@@ -39,7 +39,7 @@ class Reservation
     /**
      * @var string
      *
-     * @ORM\Column(name="status", type="smallint", length=255)
+     * @ORM\Column(name="status", type="smallint", options={"default":"0"})
      */
     private $status = self::PENDING;
 

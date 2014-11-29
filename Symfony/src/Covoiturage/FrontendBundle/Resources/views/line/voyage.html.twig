@@ -25,17 +25,22 @@
             </div>
         </li>
         <li class="price">
-            <span class="price-info">{{ voyage.nbPlace }} pl.libres</span>
+            <span class="price-info">{{ voyage.getFreeReservations() }} pl.libres</span>
             <i class="icon-price double hidden-lg"></i>
             <strong>{{ voyage.prix }}<sup>DT</sup></strong>
             <span>par personne</span>
         </li>
         <li class="price-reserve">
 
-            {{ render(controller(
-            'CovoiturageFrontendBundle:Reservation:reservation',
-            { 'voyage': voyage }
-            )) }}
+            <script type="application/javascript">
+                var urlVoyageResrvation = '{{ path("covoiturage_frontend_voyage_reservation") }}';
+            </script>
+
+            {% if voyage.getFreeReservations() > 0  and (user_reservations[voyage.getId()] == 0) and app.user != voyage.getUtilisateur() %}
+            <button type="button" onclick="reservation({{ voyage.getId() }})" class="btn btn-middle btn-icon btn-icon-right"><span>Reservation</span></button>
+            {% endif %}
+
+
             <a href="{{ path('covoiturage_frontend_voyage_show',{id:voyage.getId()}) }}" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
         </li>
     </ul>
