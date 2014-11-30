@@ -93,6 +93,22 @@ class VoyageController extends Controller
         return new Response('OK.');
 
     }
+    public function showAction(Voyage $voyage)
+    {
+        if (!$voyage) {
+            throw new NotFoundHttpException('Introuvable');
+        }
+
+        return $this->render('CovoiturageFrontendBundle:Voyage:show.html.twig',
+            array(
+                'voyage' => $voyage
+            )
+        );
+
+    }
+
+
+
 
 
 

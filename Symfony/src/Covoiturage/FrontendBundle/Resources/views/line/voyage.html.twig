@@ -7,7 +7,7 @@
             </div>
             <div class="price-content-right">
                 <span class="price-info">{{ voyage.horaire|date }}</span>
-                <h2 class="price-title"><a href="#">{{ voyage.idDepart.name }} → {{ voyage.idArrive.name }}</a></h2>
+                <h2 class="price-title"><a href="{{ path('covoiturage_frontend_voyage_show',{id:voyage.getId()}) }}">{{ voyage.idDepart.name }} → {{ voyage.idArrive.name }}</a></h2>
                 <div class="price-rating">
                     <div class="rating clearfix">
                         <span rel="1" class="star voted"></span>
@@ -31,7 +31,12 @@
             <span>par personne</span>
         </li>
         <li class="price-reserve">
-            <a href="#" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
+
+            {{ render(controller(
+            'CovoiturageFrontendBundle:Reservation:reservation',
+            { 'voyage': voyage }
+            )) }}
+            <a href="{{ path('covoiturage_frontend_voyage_show',{id:voyage.getId()}) }}" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
         </li>
     </ul>
 </div>
