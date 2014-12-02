@@ -45,53 +45,52 @@ class DefaultController extends Controller
         );
     }
 
-    /**
-     * @param Request $request
-     */
-    public function searchAction(Request $request)
+    public function searchAction(Request $request,$page = 1)
     {
-        $horaire = $request->query->get('date');
-        $nbPlace = $request->query->get('nbPlace');
-        $startingLoc = $request->query->get('sloc');
-        $arrivingLoc = $request->query->get('aloc');
-        $startingDel = $request->query->get('sdel');
-        $arrivingDel = $request->query->get('adel');
-        $startingGov = $request->query->get('sgov');
-        $arrivingGov = $request->query->get('agov');
+        //@TODO:
+        // handle date in search
+        // get voyage count for searches
+        // pass throught search params between pages
+        // set fields for search twig
 
-        //var_dump($horaire);die();
-        $horaire = "16/02/2014 07:00";
+        $depart = $request->query->get('depart');
+        $arrive = $request->query->get('arrive');
+        $date = $request->query->get('date');
 
-//var_dump($startingGov);die();
-        $emVoyage = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage');
-        $qb = $emVoyage->createQueryBuilder('v');
-        if( $startingGov !== null ){
-            $qb->innerJoin('v.idDepart','ld');
-            $qb->innerJoin('ld.idDelegation','dd');
-            $qb->innerJoin('dd.idGouvernorat','gd', QueryExpr\Join::WITH, 'gd.id = '.$startingGov);
-        }elseif( $startingDel !== null ){
-            $qb->innerJoin('v.idDepart','ld');
-            $qb->innerJoin('ld.idDelegation','dd', QueryExpr\Join::WITH, 'dd.id ='.$startingDel);
-        }elseif( $startingLoc !== null )
-            $qb->andWhere('v.idLocalite='.$startingLoc);
-        if( $arrivingGov !== null ){
-            $qb->innerJoin('v.idArrive','la');
-            $qb->innerJoin('la.idDelegation','da');
-            $qb->innerJoin('da.idGouvernorat','ga', QueryExpr\Join::WITH, 'ga.id = '.$arrivingGov);
-        }elseif( $arrivingDel !== null ){
-            $qb->innerJoin('v.idDepart','la');
-            $qb->innerJoin('la.idDelegation','da', QueryExpr\Join::WITH, 'da.id = '.$arrivingDel);
-        }elseif( $arrivingLoc !== null )
-            $qb->andWhere("'v.idLocalite='".$arrivingLoc."'");
-        if( $horaire !== null )
-            $qb->andWhere("v.horaire='".$horaire."'");
-        if( $nbPlace !== null )
-            $qb->andWhere("v.nbPlace='".$nbPlace."'");
+        $criteria = array(
+            'idDepart' => $depart,
+            'idArrive' => $arrive,
+            'horaire'  => $date,
+        );
 
-        $q = $qb->getQuery();
-        $listOffres = $q->execute();
-        //$listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')->findBy($creteria);
-        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig', array('list_voyages' => $listOffres));
+
+        $maxPerPage =$this->container->getParameter('max_per_page');
+
+        $listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')->searchVoyages($criteria,$page,$maxPerPage);
+
+
+        $voyagesCount =10;
+
+        $pagination = array(
+            'page' => $page,
+            'route' => 'covoiturage_frontend_search',
+            'pages_count' => ceil($voyagesCount / $maxPerPage),
+            'route_params' => array('page'=>$page)
+        );
+        $user = $this->getUser();
+        $userReservations = null;
+        foreach($listOffres as $voyage) {
+            $userReservations[$voyage->getId()] = 0;
+            if ($user){
+                $userReservations[$voyage->getId()] = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Reservation')
+                    ->getUserReservations($voyage->getId(), $user->getId());
+
+            }
+        }        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                         array('list_voyages' => $listOffres,
+                                    'pagination' => $pagination,
+                                    'user_reservations'=>$userReservations
+                    )
+        );
     }
 
     public function getOffreAction()

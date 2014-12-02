@@ -1,23 +1,19 @@
-<form action="#" method="post" id="reservation">
+<form action="{{ path('covoiturage_frontend_search') }}" method="GET" id="reservation">
     <div class="inner">
         <div class="section section-place">
             <div id="started_place" class="field_text">
-                <label for="filter_place_in" class="label_title">Lieu de départ</label>
-                {{ render( controller( 'CovoiturageFrontendBundle:Place:getGouvernorats' )) }}
-                <div style="display: none"><select class="annonce_idDelegation select_styled blue"></select></div>
-                <div style="display: none"><select class="annonce_idLocalite select_styled blue"></select></div>
+                <label for="select-depart" class="label_title">Lieu de départ</label>
+                {{ render(controller('CovoiturageFrontendBundle:Place:getLocations', { 'name': 'depart' })) }}
             </div>
             <div id="arrived_place" class="field_text">
-                <label for="filter_place_out" class="label_title">Lieu d'arrivé</label>
-                {{ render( controller( 'CovoiturageFrontendBundle:Place:getGouvernorats' )) }}
-                <div style="display: none"><select class="annonce_idDelegation select_styled blue"></select></div>
-                <div style="display: none"><select class="annonce_idLocalite select_styled blue"></select></div>
+                <label for="select-arrive" class="label_title">Lieu d'arrivé</label>
+                {{ render( controller( 'CovoiturageFrontendBundle:Place:getLocations', {'name':'arrive'} )) }}
             </div>
         </div>
         <div class="section section-date">
             <div class="field_text input-date">
-                <label for="filter_date_in" class="label_title">Date</label>
-                <input data-role="date" data-inline="true" type="text" name="filter_date_in" value="Date de départ" id="filter_date_in" />
+                <label for="filter_date_in" class="label_title">Date départ</label>
+                <input data-role="date" data-inline="true" type="text" name="date" placeholder="Peu importe" id="filter_date_in" />
             </div>
             <script>
                 jQuery(document).ready(function($) {
@@ -29,16 +25,7 @@
                 });
             </script>
         </div>
-        <div class="section section-persons clearfix">
-            <label for="nb_places" class="label_title">Nombre de place disponible</label>
-            <select class="select_styled blue" name="nb_places" id="nb_places">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
+
     </div>
     <div class="rowSubmit">
         <span class="btn btn-full"><input type="submit" id="search" value="Rechercher" /></span>
