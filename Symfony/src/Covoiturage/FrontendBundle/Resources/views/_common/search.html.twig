@@ -3,6 +3,7 @@
         <div class="section section-place">
             <div id="started_place" class="field_text">
                 <label for="select-depart" class="label_title">Lieu de départ</label>
+
                 {{ render(controller('CovoiturageFrontendBundle:Place:getLocations', { 'name': 'depart' })) }}
             </div>
             <div id="arrived_place" class="field_text">

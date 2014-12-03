@@ -6,7 +6,7 @@
     <select id="select-{{ select_field }}"  class="annonce_idLocalite select_styled blue" name="{{ select_field }}" required>
         <option value="">Choisir votre localié</option>
         {% for option in list_options %}
-            <option value="{{ option.id }}">{{ option.name }}</option>
+            <option value="{{ option.id }}" {% if  option.id == selected%} selected{% endif %}>{{ option.name }}</option>
         {% endfor %}
     </select>
 {% else %}

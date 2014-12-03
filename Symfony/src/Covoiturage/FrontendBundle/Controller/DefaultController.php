@@ -47,8 +47,6 @@ class DefaultController extends Controller
 
     public function searchAction(Request $request,$page = 1)
     {
-        //@TODO:
-        // set fields for search twig
 
         $depart = $request->query->get('depart');
         $arrive = $request->query->get('arrive');
@@ -94,6 +92,9 @@ class DefaultController extends Controller
                                       'pagination' => $pagination,
                                       'user_reservations'=>$userReservations,
                                       'count_voyages'=>$voyagesCount,
+                                      'depart'=>$depart,
+                                      'arrive'=>$arrive,
+                                      'date'=>$date,
                     )
         );
     }
