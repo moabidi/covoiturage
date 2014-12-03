@@ -48,7 +48,6 @@ class DefaultController extends Controller
     public function searchAction(Request $request,$page = 1)
     {
         //@TODO:
-        // get voyage count for searches
         // pass throught search params between pages
         // set fields for search twig
 
@@ -68,7 +67,9 @@ class DefaultController extends Controller
         $listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')->searchVoyages($criteria,$page,$maxPerPage);
 
 
-        $voyagesCount =10;
+
+        $voyagesCount = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
+            ->countVoyagesSearch($criteria);
 
         $pagination = array(
             'page' => $page,

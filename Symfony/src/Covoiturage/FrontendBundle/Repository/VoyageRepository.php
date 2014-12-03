@@ -136,6 +136,36 @@ class VoyageRepository extends EntityRepository
         return new Paginator($qb);
     }
 
+    /**
+     * Get search count voyages
+     *
+     * @param array $criteria (idDepart,idArrive,date)
+     * @return int
+     */
+    public function countVoyagesSearch(array $criteria)
+    {
+        $params = array();
+        $params['depart'] = $criteria['idDepart'];
+        $params['arrive'] = $criteria['idArrive'];
 
+        $qb = $this->_em->createQueryBuilder()
+            ->select('count(voyage.id)')
+            ->from('CovoiturageFrontendBundle:Voyage','voyage')
+            ->where('voyage.idDepart = :depart')
+            ->andWhere('voyage.idArrive = :arrive')
+        ;
+
+        if (!empty($criteria['horaire'])) {
+            $date = \DateTime::createFromFormat('j/m/Y H:i', $criteria['horaire']);
+            $sDate = $date->format('Y-m-d H:i:s');
+            $qb->andWhere('voyage.horaire = :horaire');
+            $params['horaire'] = $sDate;
+        }
+        $qb->setParameters($params);
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
 
 } 
