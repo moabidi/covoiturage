@@ -1,7 +1,8 @@
 {% extends 'CovoiturageFrontendBundle::layout.html.twig' %}
 
 {%  block content %}
-{% if list_voyages|length > 0 %}
+{% if count_voyages > 0 %}
+    <h1>{{ count_voyages }} navettes trouvées!</h1>
 <div class="price-list">
         <ul class="price-top clearfix">
             <li class="price-content">Trajets</li>

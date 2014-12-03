@@ -90,9 +90,10 @@ class DefaultController extends Controller
                     ->getUserReservations($voyage->getId(), $user->getId());
 
             }
-        }        return $this->render('CovoiturageFrontendBundle:Voyage:search.html.twig',                                         array('list_voyages' => $listOffres,
-                                    'pagination' => $pagination,
-                                    'user_reservations'=>$userReservations
+    }        return $this->render('CovoiturageFrontendBundle:Voyage:search.html.twig',                                     array('list_voyages' => $listOffres,
+                                      'pagination' => $pagination,
+                                      'user_reservations'=>$userReservations,
+                                      'count_voyages'=>$voyagesCount,
                     )
         );
     }

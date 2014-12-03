@@ -120,10 +120,11 @@ class VoyageRepository extends EntityRepository
 
         if (!empty($criteria['horaire'])) {
             $date = \DateTime::createFromFormat('j/m/Y H:i', $criteria['horaire']);
-            $sDate = $date->format('Y-m-d H:i:s');
-            $qb->andWhere('voyage.horaire = :horaire');
-            $params['horaire'] = $sDate;
-
+            if (is_object($date)) {
+                $sDate = $date->format('Y-m-d H:i:s');
+                $qb->andWhere('voyage.horaire = :horaire');
+                $params['horaire'] = $sDate;
+            }
         }
         $qb->setParameters($params);
 
@@ -157,9 +158,11 @@ class VoyageRepository extends EntityRepository
 
         if (!empty($criteria['horaire'])) {
             $date = \DateTime::createFromFormat('j/m/Y H:i', $criteria['horaire']);
-            $sDate = $date->format('Y-m-d H:i:s');
-            $qb->andWhere('voyage.horaire = :horaire');
-            $params['horaire'] = $sDate;
+            if (is_object($date)) {
+                $sDate = $date->format('Y-m-d H:i:s');
+                $qb->andWhere('voyage.horaire = :horaire');
+                $params['horaire'] = $sDate;
+            }
         }
         $qb->setParameters($params);
 
