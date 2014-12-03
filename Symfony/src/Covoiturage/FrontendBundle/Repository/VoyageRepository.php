@@ -97,4 +97,78 @@ class VoyageRepository extends EntityRepository
         return $count;
     }
 
+    /**
+     * Get search voyages
+     *
+     * @param array $criteria (idDepart,idArrive,date)
+     * @param int $page
+     * @param int $maxperpage
+     * @return Paginator
+     */
+    public function searchVoyages(array $criteria, $page=1, $maxperpage=10)
+    {
+        $params = array();
+        $params['depart'] = $criteria['idDepart'];
+        $params['arrive'] = $criteria['idArrive'];
+
+        $qb = $this->_em->createQueryBuilder()
+            ->select('voyage')
+            ->from('CovoiturageFrontendBundle:Voyage','voyage')
+            ->where('voyage.idDepart = :depart')
+            ->andWhere('voyage.idArrive = :arrive')
+        ;
+
+        if (!empty($criteria['horaire'])) {
+            $date = \DateTime::createFromFormat('j/m/Y H:i', $criteria['horaire']);
+            if (is_object($date)) {
+                $sDate = $date->format('Y-m-d H:i:s');
+                $qb->andWhere('voyage.horaire = :horaire');
+                $params['horaire'] = $sDate;
+            }
+        }
+        $qb->setParameters($params);
+
+        $qb->orderBy('voyage.id','DESC');
+
+
+        $qb->setFirstResult(($page-1) * $maxperpage)
+            ->setMaxResults($maxperpage);
+
+        return new Paginator($qb);
+    }
+
+    /**
+     * Get search count voyages
+     *
+     * @param array $criteria (idDepart,idArrive,date)
+     * @return int
+     */
+    public function countVoyagesSearch(array $criteria)
+    {
+        $params = array();
+        $params['depart'] = $criteria['idDepart'];
+        $params['arrive'] = $criteria['idArrive'];
+
+        $qb = $this->_em->createQueryBuilder()
+            ->select('count(voyage.id)')
+            ->from('CovoiturageFrontendBundle:Voyage','voyage')
+            ->where('voyage.idDepart = :depart')
+            ->andWhere('voyage.idArrive = :arrive')
+        ;
+
+        if (!empty($criteria['horaire'])) {
+            $date = \DateTime::createFromFormat('j/m/Y H:i', $criteria['horaire']);
+            if (is_object($date)) {
+                $sDate = $date->format('Y-m-d H:i:s');
+                $qb->andWhere('voyage.horaire = :horaire');
+                $params['horaire'] = $sDate;
+            }
+        }
+        $qb->setParameters($params);
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+
+        return $count;
+    }
+
 } 

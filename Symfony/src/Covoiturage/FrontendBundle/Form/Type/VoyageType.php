@@ -21,7 +21,7 @@ class VoyageType extends AbstractType
     {
         //TODO: add the rest of the form
        $builder
-            ->add('horaire', 'time')
+            ->add('horaire', 'datetime')
             ->add('prix', 'money')
             ->add('nbPlace', 'choice', array(
                    'choices'=> array( '1' =>'1',

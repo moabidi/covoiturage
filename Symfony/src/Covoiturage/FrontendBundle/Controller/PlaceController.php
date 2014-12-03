@@ -57,22 +57,24 @@ class PlaceController extends Controller{
     }
     /**************** List localites **********************/
     /**
-     * @param Request $request
+     * @param string $name
+     * @param string $selected
      * @return Response
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    public function getLocationsAction(Request $request)
+    public function getLocationsAction($name,$selected = "")
     {
-        $idDelegation = $request->request->get('idPays');
-        if (is_numeric($idDelegation)){
-            $listDelegations = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Localite')->matching( new Criteria( new Expr\Comparison( "idDelegation",Expr\Comparison::EQ,$idDelegation)));
+
+
+            /* @var \Covoiturage\FrontendBundle\Entity\Localite */
+            $listLocalites = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Localite')->findAll();
             return $this->render('CovoiturageFrontendBundle:_common:list_options.html.twig', array(
-                'list_options' => $listDelegations,
-                'select_field' => 'localite'
+                'list_options' => $listLocalites,
+                'select_field' => $name,
+                'selected' => $selected,
             ));
-        }else{
-            throw $this->createNotFoundException(' id doit etre de type entier : '.$idDelegation);
-        }
+
+
     }
 
 }

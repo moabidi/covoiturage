@@ -42,5 +42,5 @@ covoiturage_frontend_getLocations:
     defaults: { _controller: CovoiturageFrontendBundle:Place:getLocations }
 ######search root###########
 covoiturage_frontend_search:
-    pattern:  /search
-    defaults: { _controller: CovoiturageFrontendBundle:Default:search }
+    pattern:  /search/{page}
+    defaults: { _controller: CovoiturageFrontendBundle:Default:search,page:1 }
