@@ -107,18 +107,26 @@ class VoyageRepository extends EntityRepository
      */
     public function searchVoyages(array $criteria, $page=1, $maxperpage=10)
     {
+        $params = array();
+        $params['depart'] = $criteria['idDepart'];
+        $params['arrive'] = $criteria['idArrive'];
+
         $qb = $this->_em->createQueryBuilder()
             ->select('voyage')
             ->from('CovoiturageFrontendBundle:Voyage','voyage')
-            ->where('voyage.idDepart = '.$criteria['idDepart'])
-            ->where('voyage.idArrive = '.$criteria['idArrive'])
+            ->where('voyage.idDepart = :depart')
+            ->andWhere('voyage.idArrive = :arrive')
         ;
-        //@TODO:
-        //start date
+
         if (!empty($criteria['horaire'])) {
-            //$date = \DateTime::createFromFormat('m d, y',$criteria['horaire']);
-           // $qb->where('voyage.horaire = '.$date->format(''));
+            $date = \DateTime::createFromFormat('j/m/Y H:i', $criteria['horaire']);
+            $sDate = $date->format('Y-m-d H:i:s');
+            $qb->andWhere('voyage.horaire = :horaire');
+            $params['horaire'] = $sDate;
+
         }
+        $qb->setParameters($params);
+
         $qb->orderBy('voyage.id','DESC');
 
 
@@ -127,5 +135,7 @@ class VoyageRepository extends EntityRepository
 
         return new Paginator($qb);
     }
+
+
 
 } 

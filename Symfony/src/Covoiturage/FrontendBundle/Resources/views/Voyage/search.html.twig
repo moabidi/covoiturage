@@ -1,6 +1,7 @@
 {% extends 'CovoiturageFrontendBundle::layout.html.twig' %}
 
 {%  block content %}
+{% if list_voyages|length > 0 %}
 <div class="price-list">
         <ul class="price-top clearfix">
             <li class="price-content">Trajets</li>
@@ -13,6 +14,8 @@
     {% endfor %}
 
     {% include 'CovoiturageFrontendBundle:_common:pagination.html.twig' with {'pagination':pagination} %}
-
+ {% else %}
+    Aucune résultat trouvés pour votre recherche.
+{% endif %}
 
 {% endblock %}

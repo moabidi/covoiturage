@@ -48,7 +48,6 @@ class DefaultController extends Controller
     public function searchAction(Request $request,$page = 1)
     {
         //@TODO:
-        // handle date in search
         // get voyage count for searches
         // pass throught search params between pages
         // set fields for search twig
@@ -86,7 +85,7 @@ class DefaultController extends Controller
                     ->getUserReservations($voyage->getId(), $user->getId());
 
             }
-        }        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                         array('list_voyages' => $listOffres,
+        }        return $this->render('CovoiturageFrontendBundle:Voyage:search.html.twig',                                         array('list_voyages' => $listOffres,
                                     'pagination' => $pagination,
                                     'user_reservations'=>$userReservations
                     )
