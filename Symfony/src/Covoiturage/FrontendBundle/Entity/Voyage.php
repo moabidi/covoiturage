@@ -26,7 +26,7 @@ class Voyage
     /**
      * @var string
      *
-     * @ORM\Column(name="horaire", type="time", length=16, nullable=true)
+     * @ORM\Column(name="horaire", type="datetime", length=16, nullable=true)
      */
     private $horaire;
 
