@@ -48,7 +48,6 @@ class DefaultController extends Controller
     public function searchAction(Request $request,$page = 1)
     {
         //@TODO:
-        // pass throught search params between pages
         // set fields for search twig
 
         $depart = $request->query->get('depart');
@@ -75,7 +74,12 @@ class DefaultController extends Controller
             'page' => $page,
             'route' => 'covoiturage_frontend_search',
             'pages_count' => ceil($voyagesCount / $maxPerPage),
-            'route_params' => array('page'=>$page)
+            'route_params' => array(
+                                'page'=>$page,
+                                'depart'=>$depart,
+                                'arrive'=>$arrive,
+                                'date'=>$date
+                            )
         );
         $user = $this->getUser();
         $userReservations = null;

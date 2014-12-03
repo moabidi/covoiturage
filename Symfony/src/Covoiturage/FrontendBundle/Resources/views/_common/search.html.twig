@@ -1,5 +1,4 @@
 <form action="{{ path('covoiturage_frontend_search') }}" method="GET" id="reservation">
-    <input type="hidden" name="page" value="{% if  pagination.page is defined %}{{ pagination.page }}{% else %}1{% endif %}">
     <div class="inner">
         <div class="section section-place">
             <div id="started_place" class="field_text">
