@@ -12,6 +12,8 @@ namespace Covoiturage\FrontendBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Covoiturage\FrontendBundle\Helper\UserReservation;
+
 
 
 
@@ -51,8 +53,13 @@ class UserController extends Controller
             'route_params' => array('page'=>$page)
         );
 
+        $user = $this->getUser();
+        $userReservationHelper = new UserReservation($user,$userlistVoyages,$this->getDoctrine());
+        $userReservations = $userReservationHelper->setUserReservations();
+
         return $this->render('CovoiturageFrontendBundle:User:mes_voyages.html.twig',                                       array('list_voyages'    => $userlistVoyages,
-                    'pagination'      => $pagination,
+                                     'pagination'      => $pagination,
+                                        'user_reservations'=>$userReservations,
                 )
         );
 
