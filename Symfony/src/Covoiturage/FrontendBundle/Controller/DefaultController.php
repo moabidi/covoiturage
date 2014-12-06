@@ -2,6 +2,7 @@
 
 namespace Covoiturage\FrontendBundle\Controller;
 
+use Covoiturage\FrontendBundle\Helper\UserReservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,15 +29,8 @@ class DefaultController extends Controller
             'route_params' => array('page'=>$page)
         );
         $user = $this->getUser();
-        foreach($listVoyages as $voyage) {
-            $userReservations[$voyage->getId()] = 0;
-            if ($user){
-                $userReservations[$voyage->getId()] = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Reservation')
-                    ->getUserReservations($voyage->getId(), $user->getId());
-
-            }
-        }
-
+        $userReservationHelper = new UserReservation($user,$listVoyages,$this->getDoctrine());
+        $userReservations = $userReservationHelper->setUserReservations();
 
         return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                       array('list_voyages'    => $listVoyages,
                                 'pagination'      => $pagination,
@@ -79,16 +73,13 @@ class DefaultController extends Controller
                                 'date'=>$date
                             )
         );
-        $user = $this->getUser();
-        $userReservations = null;
-        foreach($listOffres as $voyage) {
-            $userReservations[$voyage->getId()] = 0;
-            if ($user){
-                $userReservations[$voyage->getId()] = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Reservation')
-                    ->getUserReservations($voyage->getId(), $user->getId());
 
-            }
-    }        return $this->render('CovoiturageFrontendBundle:Voyage:search.html.twig',                                     array('list_voyages' => $listOffres,
+        $user = $this->getUser();
+        $userReservationHelper = new UserReservation($user,$listOffres,$this->getDoctrine());
+        $userReservations = $userReservationHelper->setUserReservations();
+
+
+        return $this->render('CovoiturageFrontendBundle:Voyage:search.html.twig',                                     array(    'list_voyages' => $listOffres,
                                       'pagination' => $pagination,
                                       'user_reservations'=>$userReservations,
                                       'count_voyages'=>$voyagesCount,

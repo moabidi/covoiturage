@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Covoiturage\FrontendBundle\Helper\UserReservation;
+
 
 
 class VoyageController extends Controller
@@ -99,13 +101,10 @@ class VoyageController extends Controller
             throw new NotFoundHttpException('Introuvable');
         }
 
-        $userReservations[$voyage->getId()] = 0;
+        $listVoyages = array($voyage);
         $user = $this->getUser();
-        if ($user){
-            $userReservations[$voyage->getId()] = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Reservation')
-                ->getUserReservations($voyage->getId(), $user->getId());
-
-        }
+        $userReservationHelper = new UserReservation($user,$listVoyages,$this->getDoctrine());
+        $userReservations = $userReservationHelper->setUserReservations();
 
         return $this->render('CovoiturageFrontendBundle:Voyage:show.html.twig',
             array(
