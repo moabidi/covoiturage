@@ -29,10 +29,15 @@ class ReservationRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder()
             ->select('count(reservation.id)')
             ->from('CovoiturageFrontendBundle:Reservation','reservation')
-            ->where('reservation.status = '.$status)
-            ->where('reservation.voyage = :voyage')
-            ->setParameter('voyage',$voyage)
+            ->where('reservation.status = :status')
+            ->andWhere('reservation.voyage = :voyage')
+
         ;
+        $params = array();
+        $params['status'] = $status;
+        $params['voyage'] = $voyage;
+        $qb->setParameters($params);
+
 
         $count = $qb->getQuery()->getSingleScalarResult();
 
@@ -44,9 +49,14 @@ class ReservationRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder()
             ->select('count(reservation.id)')
             ->from('CovoiturageFrontendBundle:Reservation','reservation')
-            ->where('reservation.voyage = '.$voyage)
-            ->where('reservation.utilisateur = '.$user)
+            ->where('reservation.voyage = :voyage')
+            ->andWhere('reservation.utilisateur = :utilisateur')
         ;
+
+        $params = array();
+        $params['voyage'] = $voyage;
+        $params['utilisateur'] = $user;
+        $qb->setParameters($params);
 
         $count = $qb->getQuery()->getSingleScalarResult();
 
