@@ -32,7 +32,7 @@ class DefaultController extends Controller
         $userReservationHelper = new UserReservation($user,$listVoyages,$this->getDoctrine());
         $userReservations = $userReservationHelper->setUserReservations();
 
-        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                       array('list_voyages'    => $listVoyages,
+        return $this->render('CovoiturageFrontendBundle::layout_home.html.twig',                                       array('list_voyages'    => $listVoyages,
                                 'pagination'      => $pagination,
                                 'user_reservations'=>$userReservations
             )

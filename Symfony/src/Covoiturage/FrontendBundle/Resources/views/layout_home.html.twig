@@ -18,8 +18,7 @@
                 <h1 class="wow fadeInDown">BESOIN D'UNE TOUR?</h1>
                 <h2 class="wow fadeInUp">Ceux qui partagent la route, où la part du voyage.</h2>
                 <div class="actions">
-                    <a href="#services" title="Our services" class="btn large white wow fadeInLeft anchor">Nos services</a>
-                    <a href="#booking" title="Make a booking" class="btn large color wow fadeInRight anchor">Réserver</a>
+                    <a href="{{ path('covoiturage_frontend_voyage_publish') }}" title="Poster Navette" class="btn large white wow fadeInLeft anchor">Poster Navette</a>
                 </div>
             </div>
         </div>
@@ -37,8 +36,8 @@
             <div class="row">
                 <!-- Item -->
                 <div class="one-third wow fadeIn">
-                    <span class="circle"><span class="ico heart"></span></span>
-                    <h3>Eco-friendly</h3>
+                    <span class="circle"><span class="ico wallet"></span></span>
+                    <h3>Économique</h3>
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy  tinc dolore magna.</p>
                 </div>
                 <!-- //Item -->
@@ -53,8 +52,8 @@
 
                 <!-- Item -->
                 <div class="one-third wow fadeIn" data-wow-delay=".4s">
-                    <span class="circle"><span class="ico wallet"></span></span>
-                    <h3>Économique</h3>
+                    <span class="circle"><span class="ico heart"></span></span>
+                    <h3>Eco-friendly</h3>
                     <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy  tinc dolore magna.</p>
                 </div>
                 <!-- //Item -->
@@ -66,8 +65,8 @@
     <!-- Call to action -->
     <div class="black cta">
         <div class="wrap">
-            <p class="wow fadeInLeft">Like what you see? Are you ready to stand out? You know what to do.</p>
-            <a href="http://themeforest.net/item/transfers-transport-and-car-hire-html-template/9366018?ref=themeenergy" class="btn huge color right wow fadeInRight">Purchase theme</a>
+            <p class="wow fadeInLeft">Créer votre annonce dés maintenant</p>
+            <a href={{ path('covoiturage_frontend_voyage_publish') }}" class="btn huge color right wow fadeInRight">Poster navette</a>
         </div>
     </div>
     <!-- //Call to action -->
