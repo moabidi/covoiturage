@@ -1,16 +1,15 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
+{% javascripts
+    '@CovoiturageFrontendBundle/Resources/public/js/libs/bootstrap.min.js'
+    '@CovoiturageFrontendBundle/Resources/public/js/jquery.uniform.min.js'
+    '@CovoiturageFrontendBundle/Resources/public/js/jquery.datetimepicker.js'
+    '@CovoiturageFrontendBundle/Resources/public/js/jquery.slicknav.min.js'
+    '@CovoiturageFrontendBundle/Resources/public/js/wow.min.js'
+    '@CovoiturageFrontendBundle/Resources/public/js/search.js'
+    '@CovoiturageFrontendBundle/Resources/public/js/scripts.js'
+    '@CovoiturageFrontendBundle/Resources/public/js/general.js'
+    %}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
 
-<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/libs/bootstrap.min.js') }}"></script>
-
-
-<script src="{{ asset('bundles/covoituragefrontend/js/jquery.uniform.min.js') }}"></script>
-<script src="{{ asset('bundles/covoituragefrontend/js/jquery.datetimepicker.js') }}"></script>
-<script src="{{ asset('bundles/covoituragefrontend/js/jquery.slicknav.min.js') }}"></script>
-<script src="{{ asset('bundles/covoituragefrontend/js/wow.min.js') }}"></script>
-<script src="{{ asset('bundles/covoituragefrontend/js/search.js') }}"></script>
-<script src="{{ asset('bundles/covoituragefrontend/js/scripts.js') }}"></script>
-
-
-
-<script type="text/javascript" src="{{ asset('bundles/covoituragefrontend/js/general.js') }}"></script>

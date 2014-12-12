@@ -4,13 +4,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <title>{% block title %}Navette {% endblock %}</title>
 
-
-
-
-<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/theme-turquoise.css') }}" />
-<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/style.css') }}" />
-<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/animate.css') }}" />
+{% stylesheets filter='cssrewrite'
+  'bundles/covoituragefrontend/css/theme-turquoise.css'
+  'bundles/covoituragefrontend/css/style.css'
+  'bundles/covoituragefrontend/css/animate.css'
+  'bundles/covoituragefrontend/css/bootstrap.css'
+ %}
+  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
 <link href='http://fonts.googleapis.com/css?family=Raleway:400,500,600,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
+
 <link rel="shortcut icon" href="{{ asset('bundles/covoituragefrontend/images/favicon.ico') }}" />
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
