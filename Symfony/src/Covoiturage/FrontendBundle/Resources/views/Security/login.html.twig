@@ -1,6 +1,6 @@
-{% extends 'CovoiturageFrontendBundle::layout.html.twig' %}
+{% extends '::base.html.twig' %}
 
-
+{% block title %} Navette - Connextion {% endblock %}
 {% block content %}
     {% if error %}
         <div class="alert alert-danger" style="font-size: 1.2em;">Login ou Mot de passe invalide</div>
