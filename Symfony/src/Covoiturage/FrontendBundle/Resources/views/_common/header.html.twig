@@ -1,24 +1,25 @@
-<!-- row -->
-<div class="row">
-    <div class="col-sm-6">
+<header class="header" role="banner">
+    <div class="wrap">
         <!-- Logo -->
-        <h1 class="logo"><a href="#"><img src="{{ asset('bundles/covoituragefrontend/images/logo.png') }}" class="img-responsive" alt="Navette.tn"/></a></h1>
-        <!--/ Logo -->
-    </div>
-    <div class="col-sm-6">
-        <!-- User Menu -->
-        <div class="user-buttons buttons pull-right">
-            {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('fos_user_registration_register') }}" class="btn btn-icon btn-icon-left btn-icon-checkout btn-red"  style="outline: medium none;" ><span>S'inscrire</span></a>
-            <button type="button" class="btn btn-icon btn-icon-left btn-icon-login btn-green" href="#connexion-box" hidefocus="true" style="outline: medium none;" id="btn-connexion" data-toggle="modal" data-target="#loginModal"><span>Se connecter</span></button>
-            {% endif %}
-            {% if  is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('covoiturage_frontend_voyage_publish') }}" class="btn btn-icon btn-icon-left btn-icon-pencil btn-blue"  hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Publier</span></a>
-                <a href="{{ path('covoiturage_frontend_voyage_user') }}" class="btn btn-icon btn-icon-left btn-icon-pencil btn-green"  hidefocus="true" style="outline: medium none;" id="btn-connexion"><span>Mes navettes</span></a>
-                <a href="{{ path('fos_user_security_logout') }}" class="btn btn-icon btn-icon-left btn-icon-checkout btn-green" title="Se déconnecter" hidefocus="true" style="outline: medium none;" id="btn-connexion">&nbsp;</a>
-            {% endif %}
+        <div class="logo">
+            <a href="{{ path('covoiturage_frontend_homepage') }}" title="Transfers"><img src="{{ asset('bundles/covoituragefrontend/images/logo.png') }}" alt="Navette" /></a>
         </div>
-        <!--/ User Menu -->
+        <!-- //Logo -->
+
+        <!-- Main Nav -->
+        <nav role="navigation" class="main-nav">
+            <ul>
+                <li class="active"><a href="index.html" title="">Poster navette</a></li>
+                <li><a href="tailor-made.html" title="Tailor made">Comment ça fonctionne?</a></li>
+                <li><a href="contact.html" title="Contact">A propos</a></li>
+            </ul>
+        </nav>
+        <!-- //Main Nav -->
+
+        <!-- Subscribe btn -->
+        <div class="subscribe">
+            <a href="#" class="btn medium color">S'inscrire</a>
+        </div>
+        <!-- //Subscribe btn -->
     </div>
-</div>
-<!--/ row -->
+</header>
