@@ -1,31 +1,32 @@
+{% block fos_user_content %}
+<form action="{{ path("fos_user_security_check") }}" method="POST">
+            <input type="hidden" name="_csrf_token" value={{ csrf }} />
 
+            <div class="f-row">
+                <div class="full-width">
+                    <label for="username">Login</label>
+                    <input type="text" id="username" name="_username" placeholder="Login"  value="" required="required">
+                </div>
+            </div>
+            <div class="f-row">
+                <div class="full-width">
+                    <label for="password">Mot de passe</label>
+                    <input  type="password" id="password" name="_password" required="required" placeholder="Mot de passe" >
+                </div>
+            </div>
+            <div class="f-row">
+                <div class="full-width check">
+                    <div class="checker" id="uniform-checkbox"><span> <input type="checkbox" id="remember_me" name="_remember_me" value="on" /></span></div>
+                    <label for="remember_me">Se souvenir de moi</label>
+                </div>
+            </div>
+            <div class="f-row">
+                <div class="full-width">
+                    <input type="submit" value="Login" class="btn color medium full">
+                </div>
+            </div>
 
+            <p><a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié?</a><br>Pas encore membre? <a href="{{ path('fos_user_registration_register') }}">Inscris-toi!</a></p>
+        </form>
 
-                {% block fos_user_content %}
-                    <form action="{{ path("fos_user_security_check") }}" class="panel-body wrapper-lg" method="post">
-
-                        <input type="hidden" name="_csrf_token" value={{ csrf }} />
-
-                        <div class="form-group">
-                            <label class="control-label">Login</label>
-                            <input type="text" id="username" name="_username" value="" required="required" placeholder="Login" class="form-control input-lg">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label">Mot de passe</label>
-                            <input type="password" id="password" name="_password" required="required" placeholder="Mot de passe" class="form-control input-lg">
-                        </div>
-
-
-
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" />Se souvenir de moi
-                            </label>
-                        </div>
-
-                        <a href={{ path('fos_user_resetting_request') }} class="pull-right m-t-xs"><small>Mot de passe oublié?</small></a>
-                        <button type="submit" id="_submit" name="_submit" class="btn btn-icon btn-icon-left btn-icon-checkout btn-green"><span>Se Connecter</span></button>
-
-                    </form>
-                {% endblock fos_user_content %}
+{% endblock fos_user_content %}

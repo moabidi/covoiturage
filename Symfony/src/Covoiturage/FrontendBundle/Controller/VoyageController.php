@@ -115,10 +115,28 @@ class VoyageController extends Controller
 
     }
 
+    public function listAction($page)
+    {
+        $maxPerPage  = $this->container->getParameter('max_per_page');
+        $listVoyages = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
+            ->getList($page, $maxPerPage);
+        $voyagesCount = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
+            ->countVoyages();
+        $pagination = array(
+            'page' => $page,
+            'route' => 'covoiturage_frontend_voyage_list',
+            'pages_count' => ceil($voyagesCount / $maxPerPage),
+            'route_params' => array('page'=>$page)
+        );
+        $user = $this->getUser();
+        $userReservationHelper = new UserReservation($user,$listVoyages,$this->getDoctrine());
+        $userReservations = $userReservationHelper->setUserReservations();
 
-
-
-
-
+        return $this->render('CovoiturageFrontendBundle:Voyage:list.html.twig',                      array('list_voyages'    => $listVoyages,
+                'pagination'      => $pagination,
+                'user_reservations'=>$userReservations
+            )
+        );
+    }
 
 }

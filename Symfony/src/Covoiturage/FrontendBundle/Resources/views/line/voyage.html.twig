@@ -1,48 +1,33 @@
-<!-- Price item -->
-<div class="price-item">
-    <ul class="clearfix">
-        <li class="price-content clearfix">
-            <div class="price-content-left hidden-sm">
-                <div class="price-image"><img alt="" src="{{ asset('bundles/covoituragefrontend/images/temp/avatar.jpg') }}" class="img-circle"></div>
-            </div>
-            <div class="price-content-right">
-                <span class="price-info">{{ voyage.horaire|date }}</span>
-                <h2 class="price-title"><a href="{{ path('covoiturage_frontend_voyage_show',{id:voyage.getId()}) }}">{{ voyage.idDepart.name }} → {{ voyage.idArrive.name }}</a></h2>
-                <div class="price-rating">
-                    <div class="rating clearfix">
-                        <span rel="1" class="star voted"></span>
-                        <span rel="2" class="star voted"></span>
-                        <span rel="3" class="star voted"></span>
-                        <span rel="4" class="star "></span>
-                        <span rel="5" class="star"></span>
-                    </div>
-                </div>
-                <div class="price-desc hidden-lg">
-                    <p>Pseudo  : {{ voyage.getUtilisateur().getUsername() }}<br />
-                        Email : {{ voyage.getUtilisateur().getEmail() }}<br />
-                    </p>
-                </div>
-            </div>
-        </li>
-        <li class="price">
-            <span class="price-info">{{ voyage.getFreeReservations() }} pl.libres</span>
-            <i class="icon-price double hidden-lg"></i>
-            <strong>{{ voyage.prix }}<sup>DT</sup></strong>
-            <span>par personne</span>
-        </li>
-        <li class="price-reserve">
-
-            <script type="application/javascript">
-                var urlVoyageResrvation = '{{ path("covoiturage_frontend_voyage_reservation") }}';
-            </script>
-
+<article class="result">
+    <div class="one-fourth heightfix"><img src="{{ asset('bundles/covoituragefrontend/images/map-not-available.png') }}" alt="" /></div>
+    <div class="one-half heightfix">
+        <h3>{{ voyage.idDepart.name }} → {{ voyage.idArrive.name }} à {{ voyage.horaire|date }} <a href="javascript:void(0)" class="trigger color" title="Description">?</a></h3>
+        <ul>
+            <li>
+                <span class="ico people"></span>
+                <p>Places Dispo <br /><strong>{{ voyage.getFreeReservations() }} places</strong> <br /></p>
+            </li>
+            <li>
+                <span class="ico time"></span>
+                <p>Temps d'arrivée <br /><strong>50 mins</strong></p>
+            </li>
+            <li>
+                <span class="ico luggage"></span>
+                <p>Porte de bagage <br /></br.><strong>possible</strong></p>
+            </li>
+        </ul>
+    </div>
+    <div class="one-fourth heightfix">
+        <div>
+            <div class="price">{{ voyage.prix }} <small>DT</small></div>
+            <span class="meta">par passager</span>
             {% if voyage.getFreeReservations() > 0  and (user_reservations[voyage.getId()] == 0) and app.user != voyage.getUtilisateur() %}
-            <button type="button" onclick="reservation({{ voyage.getId() }})" class="btn btn-middle btn-icon btn-icon-right"><span>Reservation</span></button>
+            <button type="button" onclick="reservation({{ voyage.getId() }})" class="btn grey large">réserver</button>
             {% endif %}
-
-
-            <a href="{{ path('covoiturage_frontend_voyage_show',{id:voyage.getId()}) }}" class="btn btn-middle btn-icon btn-icon-right"><span>Plus d'infos</span></a>
-        </li>
-    </ul>
-</div>
-<!--/ Price item -->
+        </div>
+    </div>
+    <div class="full-width information">
+        <a href="javascript:void(0)" class="close color" title="Close">x</a>
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+    </div>
+</article>
