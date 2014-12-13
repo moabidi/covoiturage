@@ -1,22 +1,26 @@
 {% extends '::base.html.twig' %}
 
 {%  block content %}
-{% if count_voyages > 0 %}
-    <h1>{{ count_voyages }} navettes trouvées!</h1>
-<div class="price-list">
-        <ul class="price-top clearfix">
-            <li class="price-content">Trajets</li>
-            <li class="price">Pl.libres & Prix</li>
-            <li class="price-reserve">Réservation</li>
-        </ul>
-</div>
-    {% for voyage in list_voyages %}
-        {% include 'CovoiturageFrontendBundle:line:voyage.html.twig' with {'voyage':voyage,'user_reservations':user_reservations} %}
-    {% endfor %}
+<div class="wrap">
+<div class="row">
+<div class="full-width content">
+    {% if count_voyages > 0 %}
+        <h2>{{ count_voyages }} navettes trouvées!</h2>
 
-    {% include 'CovoiturageFrontendBundle:_common:pagination.html.twig' with {'pagination':pagination} %}
- {% else %}
-    Aucune résultat trouvés pour votre recherche.
+        <div class="results">
+
+            {% for voyage in list_voyages %}
+                {% include 'CovoiturageFrontendBundle:line:voyage.html.twig' with {'voyage':voyage,'user_reservations':user_reservations} %}
+            {% endfor %}
+
+
+
+        </div>
+{% else %}
+    <h2>Aucune résultat trouvés pour votre recherche.</h2>
 {% endif %}
 
+</div>
+</div>
+</div>
 {% endblock %}

@@ -15,8 +15,14 @@
         {% include 'CovoiturageFrontendBundle:_common:search.html.twig' %}
     {% endblock %}
 {% endif %}
-    {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
+
+    {% if pagination is defined %}
+        {% block pagination %}
+            {% include 'CovoiturageFrontendBundle:_common:pagination.html.twig' with {'pagination':pagination} %}
+        {% endblock %}
+    {% endif %}
 </main>
 <!-- //Main -->
 

@@ -14,27 +14,11 @@ use Doctrine\ORM\Query\Expr as QueryExpr;
 
 class DefaultController extends Controller
 {
-    public function indexAction($page)
+    public function indexAction()
     {
-        $maxPerPage =$this->container->getParameter('max_per_page');
-        $listVoyages = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
-            ->getList($page, $maxPerPage);
 
-        $voyagesCount = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
-            ->countVoyages();
-        $pagination = array(
-            'page' => $page,
-            'route' => 'covoiturage_frontend_homepage',
-            'pages_count' => ceil($voyagesCount / $maxPerPage),
-            'route_params' => array('page'=>$page)
-        );
-        $user = $this->getUser();
-        $userReservationHelper = new UserReservation($user,$listVoyages,$this->getDoctrine());
-        $userReservations = $userReservationHelper->setUserReservations();
 
-        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                       array('list_voyages'    => $listVoyages,
-                                'pagination'      => $pagination,
-                                'user_reservations'=>$userReservations
+        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                       array(
             )
         );
     }
@@ -85,7 +69,7 @@ class DefaultController extends Controller
                                       'count_voyages'=>$voyagesCount,
                                       'depart'=>$depart,
                                       'arrive'=>$arrive,
-                                      'date'=>$date,
+                                      'date_form'=>$date,
                     )
         );
     }
