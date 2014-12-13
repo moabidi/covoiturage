@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Navette - Page {{ page }} {% endblock %}
+{% block title %}Navette - Page {{ page|default(1) }} {% endblock %}
 
 {%  block content %}
 <div class="wrap">
