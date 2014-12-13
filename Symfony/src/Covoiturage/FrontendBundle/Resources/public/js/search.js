@@ -21,7 +21,9 @@
 			});*/
 
 			// DATE & TIME PICKER
-			$('#dep-date,#ret-date').datetimepicker();
+			$('#dep-date,#ret-date').datetimepicker({
+                format: 'd/m/Y H:i'
+            });
 		}
 	}
 
