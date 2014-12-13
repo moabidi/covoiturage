@@ -4,7 +4,7 @@
     {%  include 'CovoiturageFrontendBundle:_common:head.html.twig' %}
 </head>
 
-<body {% if app.request.attributes.get('_route') == 'covoiturage_frontend_homepage' %} class="home" {% endif %}>
+<body {% if app.request.attributes.get('_route') == 'covoiturage_frontend_homepage' %} class="home"{% endif %}>
 
 {% include 'CovoiturageFrontendBundle:_common:header.html.twig' %}
 
@@ -18,7 +18,7 @@
         {% block content %}{% endblock %}
 
 
-    {% if pagination is defined %}
+    {% if pagination is defined and pagination.pages_count >0 %}
         {% block pagination %}
             {% include 'CovoiturageFrontendBundle:_common:pagination.html.twig' with {'pagination':pagination} %}
         {% endblock %}

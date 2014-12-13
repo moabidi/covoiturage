@@ -6,6 +6,12 @@ covoiturage_frontend_voyage_publish:
     pattern:  /navette/publish
     defaults: { _controller: CovoiturageFrontendBundle:Voyage:publish }
 
+covoiturage_frontend_voyage_list:
+    pattern:  /navette/list/{page}
+    defaults: { _controller: CovoiturageFrontendBundle:Voyage:list,page:1 }
+    requirements:
+        page: -?\d+
+
 covoiturage_frontend_voyage_modify:
     pattern:  /navette/modify/{id}
     defaults: { _controller: CovoiturageFrontendBundle:Voyage:modify }

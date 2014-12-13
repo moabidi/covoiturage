@@ -1,31 +1,28 @@
 <article class="result">
-    <div class="one-fourth heightfix"><img src="images/uploads/car.jpg" alt="" /></div>
+    <div class="one-fourth heightfix"><img src="{{ asset('bundles/covoituragefrontend/images/map-not-available.png') }}" alt="" /></div>
     <div class="one-half heightfix">
-        <h3>Private car <a href="javascript:void(0)" class="trigger color" title="Description">?</a></h3>
+        <h3>{{ voyage.idDepart.name }} → {{ voyage.idArrive.name }} à {{ voyage.horaire|date }} <a href="javascript:void(0)" class="trigger color" title="Description">?</a></h3>
         <ul>
             <li>
                 <span class="ico people"></span>
-                <p>Dispo <strong>{{ voyage.getFreeReservations() }} places</strong> <br />libres</p>
+                <p>Places Dispo <br /><strong>{{ voyage.getFreeReservations() }} places</strong> <br /></p>
             </li>
             <li>
                 <span class="ico time"></span>
-                <p>Estimated time <br /><strong>50 mins</strong></p>
+                <p>Temps d'arrivée <br /><strong>50 mins</strong></p>
             </li>
             <li>
-                <span class="ico phone"></span>
-                <p>Tél. <strong>{{ voyage.getUtilisateur().getTel() }}</strong></p>
+                <span class="ico luggage"></span>
+                <p>Porte de bagage <br /></br.><strong>possible</strong></p>
             </li>
         </ul>
     </div>
     <div class="one-fourth heightfix">
-        <script type="application/javascript">
-            var urlVoyageResrvation = '{{ path("covoiturage_frontend_voyage_reservation") }}';
-        </script>
         <div>
             <div class="price">{{ voyage.prix }} <small>DT</small></div>
             <span class="meta">par passager</span>
             {% if voyage.getFreeReservations() > 0  and (user_reservations[voyage.getId()] == 0) and app.user != voyage.getUtilisateur() %}
-            <a href="booking-step1.html" onclick="reservation({{ voyage.getId() }})" class="btn grey large">réserver</a>
+            <button type="button" onclick="reservation({{ voyage.getId() }})" class="btn grey large">réserver</button>
             {% endif %}
         </div>
     </div>

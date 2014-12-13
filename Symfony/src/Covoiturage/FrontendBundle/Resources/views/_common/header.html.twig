@@ -9,9 +9,9 @@
         <!-- Main Nav -->
         <nav role="navigation" class="main-nav">
             <ul>
-                <li class="active"><a href="index.html" title="">Poster navette</a></li>
-                <li><a href="tailor-made.html" title="Tailor made">Comment ça fonctionne?</a></li>
-                <li><a href="contact.html" title="Contact">A propos</a></li>
+                <li {% if app.request.attributes.get('_route') == 'covoiturage_frontend_voyage_list' %}class="active"{% endif %}><a href="{{ path('covoiturage_frontend_voyage_list') }}">Les navettes</a></li>
+                <li {% if app.request.attributes.get('_route') == 'covoiturage_frontend_voyage_publish' %}class="active"{% endif %}><a href="{{ path('covoiturage_frontend_voyage_publish') }}">Poster navette</a></li>
+                <li><a href="contact.html">A propos</a></li>
             </ul>
         </nav>
         <!-- //Main Nav -->
