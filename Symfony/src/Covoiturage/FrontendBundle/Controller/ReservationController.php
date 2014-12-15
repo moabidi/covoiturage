@@ -10,6 +10,7 @@
 namespace Covoiturage\FrontendBundle\Controller;
 
 use Covoiturage\FrontendBundle\Entity\Reservation;
+use Covoiturage\FrontendBundle\Helper\MailingHelper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,8 +75,14 @@ class ReservationController extends Controller
 
         //@TODO:
         //send confirmation/notification email for both users
-
-
+        // finish with real params
+        $mailer = $this->get('mailer');
+        $subject = 'Confirmation Réservation';
+        $from = $this->container->getParameter('no_reply_email');
+        $to ='riahi.wissem.tn@gmail.com';
+        $body = $this->renderView('CovoiturageFrontendBundle:Reservation:email_reservation_demande.txt.twig', array('source' => 'Ariana','dest'=>"Manouba","link"=>"".$reservation->getId()."/confirmation"));
+        $mailingHelper = new MailingHelper($mailer,$to,$from,$subject,$body);
+        $mailingHelper->send();
 
 
         $ret['status'] = '200';
