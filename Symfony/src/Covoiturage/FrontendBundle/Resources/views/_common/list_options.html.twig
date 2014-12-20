@@ -3,29 +3,15 @@
 {#{ form(form) }#}
 {% spaceless %}
 {%  if list_options|length > 0  %}
-    {%  if select_field == 'gouvernorat' %}
-    <select class="annonce_idGouvernorat select_styled blue" name="annonce[idGouvernorat]" >
-        <option value="">Choisir votre gouvernorat</option>
+    <select id="select-{{ select_field }}"  class="annonce_idLocalite select_styled blue" name="{{ select_field }}" required>
+        <option value="0">Choisir votre localié</option>
         {% for option in list_options %}
-            <option value="{{ option.id }}">{{ option.name }}</option>
+            <option value="{{ option.id }}" {% if  option.id == selected%} selected{% endif %}>{{ option.name }}</option>
         {% endfor %}
     </select>
-    {%  elseif select_field == 'delegation' %}
-    <select class="annonce_idDelegation select_styled blue" name="annonce[idGouvernorat]" >
-        <option value="">Choisir votre delegation</option>
-        {% for option in list_options %}
-            <option value="{{ option.id }}">{{ option.name }}</option>
-        {% endfor %}
-    </select>
-    {%  elseif select_field == 'localite' %}
-    <select class="annonce_idLocalite select_styled blue" name="annonce[idLocalite]" >
-        <option value="">Choisir votre localié</option>
-        {% for option in list_options %}
-            <option value="{{ option.id }}">{{ option.name }}</option>
-        {% endfor %}
-    </select>
-    {% endif %}
 {% else %}
-    No suggestion
+    <select id="select-{{ select_field }}" class="annonce_idLocalite select_styled blue" name="{{ select_field }}" >
+        <option value="0">-</option>
+    </select>
 {% endif %}
 {% endspaceless %}

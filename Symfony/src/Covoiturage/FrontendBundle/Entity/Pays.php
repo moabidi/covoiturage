@@ -6,60 +6,32 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Pays
- *
- * @ORM\Table(name="pays")
  * @ORM\Entity
  */
-class Pays
+class Pays extends Localite
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=50, nullable=true)
-     */
-    private $name;
+    private $countryCode;
 
-
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
+    public function __construct($type = "pays")
     {
-        return $this->id;
+        $this->setType($type);
     }
 
     /**
-     * Set name
-     *
-     * @param string $name
-     * @return Pays
+     * @return mixed
      */
-    public function setName($name)
+    public function getCountryCode()
     {
-        $this->name = $name;
-    
-        return $this;
+        return $this->countryCode;
     }
 
     /**
-     * Get name
-     *
-     * @return string 
+     * @param mixed $countryCode
      */
-    public function getName()
+    public function setCountryCode($countryCode)
     {
-        return $this->name;
+        $this->countryCode = $countryCode;
     }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Covoiturage\FrontendBundle\Controller;
 
+use Covoiturage\FrontendBundle\Helper\UserReservation;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,63 +16,62 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        $listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')->findAll();
-        //var_dump($listOffres);
-        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig', array('list_voyages' => $listOffres));
+
+
+        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig',                                       array(
+            )
+        );
     }
 
-    public function registerAction()
+    public function searchAction(Request $request,$page = 1)
     {
 
-    }
+        $depart = $request->query->get('depart');
+        $arrive = $request->query->get('arrive');
+        $date = $request->query->get('date');
 
-    /**
-     * @param Request $request
-     */
-    public function searchAction(Request $request)
-    {
-        $horaire = $request->query->get('date');
-        $nbPlace = $request->query->get('nbPlace');
-        $startingLoc = $request->query->get('sloc');
-        $arrivingLoc = $request->query->get('aloc');
-        $startingDel = $request->query->get('sdel');
-        $arrivingDel = $request->query->get('adel');
-        $startingGov = $request->query->get('sgov');
-        $arrivingGov = $request->query->get('agov');
+        $criteria = array(
+            'idDepart' => $depart,
+            'idArrive' => $arrive,
+            'horaire'  => $date,
+        );
 
-        //var_dump($horaire);die();
-        $horaire = "16/02/2014 07:00";
 
-//var_dump($startingGov);die();
-        $emVoyage = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage');
-        $qb = $emVoyage->createQueryBuilder('v');
-        if( $startingGov !== null ){
-            $qb->innerJoin('v.idDepart','ld');
-            $qb->innerJoin('ld.idDelegation','dd');
-            $qb->innerJoin('dd.idGouvernorat','gd', QueryExpr\Join::WITH, 'gd.id = '.$startingGov);
-        }elseif( $startingDel !== null ){
-            $qb->innerJoin('v.idDepart','ld');
-            $qb->innerJoin('ld.idDelegation','dd', QueryExpr\Join::WITH, 'dd.id ='.$startingDel);
-        }elseif( $startingLoc !== null )
-            $qb->andWhere('v.idLocalite='.$startingLoc);
-        if( $arrivingGov !== null ){
-            $qb->innerJoin('v.idArrive','la');
-            $qb->innerJoin('la.idDelegation','da');
-            $qb->innerJoin('da.idGouvernorat','ga', QueryExpr\Join::WITH, 'ga.id = '.$arrivingGov);
-        }elseif( $arrivingDel !== null ){
-            $qb->innerJoin('v.idDepart','la');
-            $qb->innerJoin('la.idDelegation','da', QueryExpr\Join::WITH, 'da.id = '.$arrivingDel);
-        }elseif( $arrivingLoc !== null )
-            $qb->andWhere("'v.idLocalite='".$arrivingLoc."'");
-        if( $horaire !== null )
-            $qb->andWhere("v.horaire='".$horaire."'");
-        if( $nbPlace !== null )
-            $qb->andWhere("v.nbPlace='".$nbPlace."'");
+        $maxPerPage =$this->container->getParameter('max_per_page');
 
-        $q = $qb->getQuery();
-        $listOffres = $q->execute();
-        //$listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')->findBy($creteria);
-        return $this->render('CovoiturageFrontendBundle:Default:index.html.twig', array('list_voyages' => $listOffres));
+        $listOffres = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')->searchVoyages($criteria,$page,$maxPerPage);
+
+
+
+        $voyagesCount = $this->getDoctrine()->getRepository('CovoiturageFrontendBundle:Voyage')
+            ->countVoyagesSearch($criteria);
+
+        $pagination = array(
+            'page' => $page,
+            'route' => 'covoiturage_frontend_search',
+            'pages_count' => ceil($voyagesCount / $maxPerPage),
+            'route_params' => array(
+                                'page'=>$page,
+                                'depart'=>$depart,
+                                'arrive'=>$arrive,
+                                'date'=>$date
+                            )
+        );
+
+        $user = $this->getUser();
+        $userReservationHelper = new UserReservation($user,$listOffres,$this->getDoctrine());
+        $userReservations = $userReservationHelper->setUserReservations();
+
+
+        return $this->render('CovoiturageFrontendBundle:Voyage:search.html.twig',                                     array(    'list_voyages' => $listOffres,
+                                      'pagination' => $pagination,
+                                      'user_reservations'=>$userReservations,
+                                      'count_voyages'=>$voyagesCount,
+                                      'depart'=>$depart,
+                                      'arrive'=>$arrive,
+                                      'date_form'=>$date,
+                    )
+        );
     }
 
     public function getOffreAction()

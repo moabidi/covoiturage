@@ -1,38 +1,12 @@
 jQuery(document).ready(function() {
 
+
     $('#search').click(function(){
-        var sgov = $('#started_place select.annonce_idGouvernorat').val();
-        var sdel = $('#started_place select.annonce_idDelegation').val();
-        var sloc = $('#started_place select.annonce_idLocalite').val();
-        var agov = $('#arrived_place select.annonce_idGouvernorat').val();
-        var adel = $('#arriveded_place select.annonce_idDelegation').val();
-        var aloc = $('#arrived_place select.annonce_idLocalite').val();
-        var horaire = $('#horaire').val();
-        var nbPlace = $('#nbPlace').val();
-        var params ='?';
+        //todo:
+        //add localite fields in url for better seo
 
-        if( sloc != null && sloc !='')
-            params += '&sloc='+sloc;
-        else if( sdel != null && sdel !='')
-            params += '&sdel='+sdel;
-        else if( sgov != null && sgov != '')
-            params += '&sgov='+sgov;
-
-        if( aloc != null && aloc !='')
-            params += '&aloc='+aloc;
-        else if( adel != null && adel !='')
-            params += '&adel='+adel;
-        else if( agov != null && agov != '')
-            params += '&agov='+agov;
-
-        if( horaire != null)
-            params += '&horaire='+horaire;
-        if( nbPlace != null)
-            params += '&nbPlace='+nbPlace;
-
-        location.href = '/search'+params;
-        return false;
     });
+
 
     $('#annonce_idPays').on('change',function(){
         var select = $(this);
@@ -154,3 +128,24 @@ jQuery(document).ready(function() {
         });
     });
 });
+
+function reservation(voyage_id) {
+
+    $.ajax({
+        type: "POST",
+        url: urlVoyageResrvation,
+        dataType: 'json',
+        data: {
+            voyageId: voyage_id
+        },
+        success: function(data,status) {
+            if (data.status == "200") {
+                alert('Saved!');
+            }
+            if (data.status == "302") {
+                window.location.href = data.url;
+            }
+        }
+
+    });
+}

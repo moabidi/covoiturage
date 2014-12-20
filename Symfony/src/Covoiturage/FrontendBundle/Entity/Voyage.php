@@ -2,13 +2,15 @@
 
 namespace Covoiturage\FrontendBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+// This class represents a Navette
 /**
  * Voyage
  *
  * @ORM\Table(name="voyage")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Covoiturage\FrontendBundle\Repository\VoyageRepository")
  */
 class Voyage
 {
@@ -24,14 +26,14 @@ class Voyage
     /**
      * @var string
      *
-     * @ORM\Column(name="horaire", type="string", length=16, nullable=true)
+     * @ORM\Column(name="horaire", type="datetime", length=16, nullable=true)
      */
     private $horaire;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="prix", type="integer", nullable=true)
+     * @ORM\Column(name="prix", type="float", nullable=true)
      */
     private $prix;
 
@@ -45,7 +47,7 @@ class Voyage
     /**
      * @var integer
      *
-     * @ORM\Column(name="frequence", type="integer", nullable=true)
+     * @ORM\Column(name="frequence", type="string",length=255, nullable=true)
      */
     private $frequence;
 
@@ -70,6 +72,22 @@ class Voyage
     private $idDepart;
 
     /**
+     * @var \Utilisateur
+     *
+     * @ORM\ManyToOne(targetEntity="Utilisateur")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_utilsateur", referencedColumnName="id")
+     * })
+     */
+    private $utilisateur;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Reservation", mappedBy="voyage")
+     **/
+    private $reservations;
+
+
+    /**
      * @var \Voiture
      *
      * @ORM\ManyToOne(targetEntity="Voiture")
@@ -78,6 +96,12 @@ class Voyage
      * })
      */
     private $idVoiture;
+
+    public function __construct()
+    {
+        $this->horaire = new \Datetime();
+        $this->reservations = new ArrayCollection();
+    }
 
 
 
@@ -186,10 +210,10 @@ class Voyage
     /**
      * Set idArrive
      *
-     * @param \Covoiturage\FrontendBundle\Entity\Delegation $idArrive
+     * @param \Covoiturage\FrontendBundle\Entity\Localite $idArrive
      * @return Voyage
      */
-    public function setIdArrive(\Covoiturage\FrontendBundle\Entity\Delegation $idArrive = null)
+    public function setIdArrive(\Covoiturage\FrontendBundle\Entity\Localite $idArrive = null)
     {
         $this->idArrive = $idArrive;
     
@@ -199,7 +223,7 @@ class Voyage
     /**
      * Get idArrive
      *
-     * @return \Covoiturage\FrontendBundle\Entity\Delegation 
+     * @return \Covoiturage\FrontendBundle\Entity\Localite
      */
     public function getIdArrive()
     {
@@ -209,10 +233,10 @@ class Voyage
     /**
      * Set idDepart
      *
-     * @param \Covoiturage\FrontendBundle\Entity\Delegation $idDepart
+     * @param \Covoiturage\FrontendBundle\Entity\Localite $idDepart
      * @return Voyage
      */
-    public function setIdDepart(\Covoiturage\FrontendBundle\Entity\Delegation $idDepart = null)
+    public function setIdDepart(\Covoiturage\FrontendBundle\Entity\Localite $idDepart = null)
     {
         $this->idDepart = $idDepart;
     
@@ -222,7 +246,7 @@ class Voyage
     /**
      * Get idDepart
      *
-     * @return \Covoiturage\FrontendBundle\Entity\Delegation 
+     * @return \Covoiturage\FrontendBundle\Entity\Localite
      */
     public function getIdDepart()
     {
@@ -251,4 +275,64 @@ class Voyage
     {
         return $this->idVoiture;
     }
+
+    /**
+     * Set utilisateur
+     * @param Utilisateur $utilisateur
+     */
+    public function setUtilisateur(Utilisateur $utilisateur)
+    {
+        $this->utilisateur = $utilisateur;
+    }
+
+    /**
+     * @return \Utilisateur
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
+    }
+
+    /**
+     * @return ArrayCollection() Reservations
+     */
+    public function getReservations()
+    {
+        return $this->reservations;
+    }
+
+    /**
+     * set reservations
+     * @param Reservation $reservations
+     */
+    public function setReservations(Reservation $reservations)
+    {
+        $this->reservations = $reservations;
+    }
+
+    public function getNbReservations()
+    {
+        return count($this->reservations);
+    }
+
+    public function getFreeReservations()
+    {
+
+        if ($this->getNbReservations() == 0) {
+            return $this->getNbPlace();
+        }
+        $free = 0;
+        $count = 0;
+        $reservations = $this->getReservations();
+        foreach($reservations as $reservation) {
+            if ($reservation->getStatus() != Reservation::CONFIRMED) {
+                $count++;
+            }
+        }
+        $free = $this->nbPlace - $count;
+        if ($free < 0) $free = 0;
+
+        return $free;
+    }
+
 }

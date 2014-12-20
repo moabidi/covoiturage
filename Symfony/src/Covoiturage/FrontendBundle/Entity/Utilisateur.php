@@ -25,10 +25,35 @@ class Utilisateur extends BaseUser
      */
     protected $id;
 
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="tel", type="integer", nullable=true)
+     */
+    private $tel;
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
     }
+
+    /**
+     * @param int $tel
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+
 
 } 

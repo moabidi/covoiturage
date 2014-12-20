@@ -1,19 +1,23 @@
-<meta charset="utf-8">
-<meta name="author" content="">
-<meta name="keywords" content="">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}Navette {% endblock %}</title>
+
+
+{% stylesheets  filter='?uglifycss' filter='cssrewrite'
+  'bundles/covoituragefrontend/css/theme-turquoise.css'
+  'bundles/covoituragefrontend/css/style.css'
+  'bundles/covoituragefrontend/css/animate.css'
+ %}
+  <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,500,600,700|Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+<link rel="shortcut icon" href="{{ asset('bundles/covoituragefrontend/images/favicon.png') }}" />
+<link rel="apple-touch-icon"  href="{{ asset('bundles/covoituragefrontend/images/favicon.png') }}">
 
 
 
-<!-- Style CSS -->
-<link href="{{ asset('bundles/covoituragefrontend/css/bootstrap.css') }}" media="screen" rel="stylesheet">
-<link href="{{ asset('bundles/covoituragefrontend/css/style.css') }}" media="screen" rel="stylesheet">
-<!-- styled select -->
-<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/cusel.css') }}">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
-<!-- Lightbox prettyPhoto -->
-<link href="{{ asset('bundles/covoituragefrontend/css/prettyPhoto.css') }}" rel="stylesheet">
-
-<!-- Multiselect (Chosen.js) -->
-<link rel="stylesheet" href="{{ asset('bundles/covoituragefrontend/css/chosen.css') }}">
