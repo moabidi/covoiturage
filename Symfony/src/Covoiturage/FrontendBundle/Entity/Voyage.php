@@ -54,7 +54,7 @@ class Voyage
     /**
      * @var \Localite
      *
-     * @ORM\ManyToOne(targetEntity="Localite")
+     * @ORM\ManyToOne(targetEntity="Localite",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_arrive", referencedColumnName="id")
      * })
@@ -64,7 +64,7 @@ class Voyage
     /**
      * @var \Localite
      *
-     * @ORM\ManyToOne(targetEntity="Localite")
+     * @ORM\ManyToOne(targetEntity="Localite",cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_depart", referencedColumnName="id")
      * })
