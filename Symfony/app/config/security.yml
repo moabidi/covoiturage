@@ -17,6 +17,7 @@ security:
                 form_login:
                     provider: fos_userbundle
                     csrf_provider: form.csrf_provider
+                    default_target_path: /navette/list
                 logout:       true
                 anonymous:    true
 
@@ -25,5 +26,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/navette/publish, role: ROLE_USER }
         - { path: ^/navette/mes-navettes, role: ROLE_USER }
