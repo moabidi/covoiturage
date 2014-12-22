@@ -14,6 +14,7 @@ use Covoiturage\FrontendBundle\Form\Type\VoyageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Covoiturage\FrontendBundle\Helper\UserReservation;
@@ -31,6 +32,13 @@ class VoyageController extends Controller
         if ($form->handleRequest($request)->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $user = $this->getUser();
+            if (!$user) {
+                // pass voyage as on object to user session
+                $session = $this->getRequest()->getSession();
+                $session->set('voyage',$voyage);
+                // redirect to user login
+                return $this->redirect($this->generateUrl('fos_user_security_login'));
+            }
             $voyage->setUtilisateur($user);
             $em->persist($voyage);
             $em->flush();
