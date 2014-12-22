@@ -105,3 +105,5 @@ fi
 
 f_launch_cmd "rsync $COMMON_RSYNC_OPTIONS $COMMON_RSYNC_EXCLUDES . $REMOTE_SERVER_USERHOST:$REMOTE_PATH"
 
+f_launch_remote "php app/console cache:clear --env=prod"
+
