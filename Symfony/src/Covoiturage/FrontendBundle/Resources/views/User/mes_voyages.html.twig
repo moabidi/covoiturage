@@ -1,18 +1,24 @@
 {% extends '::base.html.twig' %}
 
+{% block title %}Navette - Mes navette {% endblock %}
+
 {%  block content %}
-<div class="price-list">
-        <ul class="price-top clearfix">
-            <li class="price-content">Trajets</li>
-            <li class="price">Pl.libres & Prix</li>
-            <li class="price-reserve">Réservation</li>
-        </ul>
-</div>
-    {% for voyage in list_voyages %}
-        {% include 'CovoiturageFrontendBundle:line:voyage.html.twig' with {'voyage':voyage} %}
-    {% endfor %}
-
-    {% include 'CovoiturageFrontendBundle:_common:pagination.html.twig' with {'pagination':pagination} %}
-
-
+    <div class="wrap">
+        <div class="row">
+            <div class="full-width content">
+                {% block flashbag_notice %}
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="flash-notice">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                {% endblock %}
+                <div class="results">
+                    {% for voyage in list_voyages %}
+                        {% include 'CovoiturageFrontendBundle:line:voyage.html.twig' with {'voyage':voyage} %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
