@@ -46,15 +46,15 @@ class LoginListener implements EventSubscriberInterface
         );
     }
 
-    public function onImplicitLogin(UserEvent $event)
+    public function onImplicitLogin(InteractiveLoginEvent $event)
     {
-        $user = $event->getUser();
+        $user = $event->getAuthenticationToken()->getUser();
         $this->completeVoyageCreation($user);
     }
 
-    public function onRegistrationCompleted(UserEvent $event)
+    public function onRegistrationCompleted(InteractiveLoginEvent $event)
     {
-        $user = $event->getUser();
+        $user = $event->getAuthenticationToken()->getUser();
         $this->completeVoyageCreation($user);
     }
 
